@@ -1,0 +1,9 @@
+{
+    "name": "Template Python operator",
+    "description": "Mean operator implemented in Python",
+    "tags": ["template"],
+    "authors": ["tercen"],
+    "urls": ["https://github.com/tercen/template-python-operator"],
+    "container":"tercen/template-python-operator:latest",
+    "properties": [ ]
+}
