@@ -27,6 +27,8 @@ ctx = context.TercenContext()
 # }
 if not ctx.task is None:
     envDict = ctx.task.environment
+    ctx.log("Printing environment")
+    ctx.log(str(envDict))
     for e in envDict:
         ctx.log(str(e))
         
