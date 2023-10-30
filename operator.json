@@ -1,9 +1,9 @@
 {
-    "name": "Template Python operator",
-    "description": "Mean operator implemented in Python",
-    "tags": ["template"],
+    "name": "Scyan Operator",
+    "description": "Tercen wrapper for the Scyan operator",
+    "tags": ["python", "scyan"],
     "authors": ["tercen"],
-    "urls": ["https://github.com/tercen/template-python-operator"],
-    "container":"tercen/template-python-operator:latest",
+    "urls": ["https://github.com/tercen/scyan_operator"],
+    "container":"tercen/scyan-operator:latest",
     "properties": [ ]
 }
