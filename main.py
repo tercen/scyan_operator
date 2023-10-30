@@ -25,7 +25,7 @@ ctx = context.TercenContext()
 # }
 if not ctx.task is None:
     envDict = ctx.task.environment
-    for key, value in {"a":"b"}.items():
+    for key, value in envDict.items():
         if key == "task.siblings.id":
             ctx2 = context.TercenContext(taskId=value)
 
