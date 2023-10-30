@@ -4,6 +4,6 @@
     "tags": ["python", "scyan"],
     "authors": ["tercen"],
     "urls": ["https://github.com/tercen/scyan_operator"],
-    "container":"tercen/scyan-operator:latest",
+    "container":"tercen/scyan_operator:latest",
     "properties": [ ]
 }
