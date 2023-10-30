@@ -34,7 +34,7 @@ if not ctx.task is None:
             ctx.log(str(e.key))
             if e.key == "task.siblings.id":
                 ctx.log(str(e.value))
-                ctx2 = context.TercenContext(taskId=e.value)
+                ctx2 = context.TercenContext(taskId=e.value[0])
 
 
 
@@ -81,7 +81,7 @@ adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
 adata.var = pd.DataFrame(yDfP.columns[1:]).rename(columns={0:"Markers"})
 adata.var_names = yDfP.columns[1:]
 
-
+# FIXME HArcoded columns
 adata.obs = pd.DataFrame(yDfP["asinh..rowId"]).rename(columns={0:"Observation"})
 #tadata.obs_names =  tmp["Observation"].to_numpy() 
 
