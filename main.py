@@ -1,4 +1,5 @@
 from tercen.client import context as context
+from tercen.model.base import Pair
 import numpy as np
 import polars as pl
 import pandas as pd
@@ -28,14 +29,13 @@ ctx = context.TercenContext()
 if not ctx.task is None:
     envDict = ctx.task.environment
     ctx.log("Printing environment")
-    ctx.log(str(envDict))
     for e in envDict:
-        ctx.log(str(e))
-        
-        if isinstance(e, dict):
-            for key, value in e.items():
-                if key == "task.siblings.id":
-                    ctx2 = context.TercenContext(taskId=value)
+        if isinstance(e, Pair):
+            ctx.log(str(e.key))
+            if e.key == "task.siblings.id":
+                ctx.log(str(e.value))
+                ctx2 = context.TercenContext(taskId=e.value)
+
 
 
 # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
