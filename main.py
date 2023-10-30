@@ -14,6 +14,7 @@ from scyan.utils import _get_subset_indices
 
 # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/928e597a-9ced-4ef1-a985-eb1180fe19b4
 #ctx = context.TercenContext(workflowId="c3ffce4e7131bfb88740387170013cd3", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
+
 ctx = context.TercenContext()
 
 # if(is.null(ctx$task)) {
@@ -25,11 +26,11 @@ ctx = context.TercenContext()
 # }
 if not ctx.task is None:
     envDict = ctx.task.environment
-    
-    for key, value in envDict.items():
-        ctx.log("{}   :    {}".format(key, value))
-        if key == "task.siblings.id":
-            ctx2 = context.TercenContext(taskId=value)
+    for e in envDict:
+        if isinstance(e, dict):
+            for key, value in e.items():
+                if key == "task.siblings.id":
+                    ctx2 = context.TercenContext(taskId=value)
 
 
 # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
