@@ -15,7 +15,7 @@ from scyan.utils import _get_subset_indices
 # Add/Read parameter to pass to Scyan function
 
 # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/928e597a-9ced-4ef1-a985-eb1180fe19b4
-#ctx = context.TercenContext(workflowId="c3ffce4e7131bfb88740387170013cd3", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
+# ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
 
 ctx = context.TercenContext()
 
@@ -33,8 +33,11 @@ if not ctx.task is None:
         if isinstance(e, Pair):
             ctx.log(str(e.key))
             if e.key == "task.siblings.id":
-                ctx.log(str(e.value))
-                ctx2 = context.TercenContext(taskId=e.value)
+                ctx.log(str(json.loads(e.value)))
+                ctx2 = context.TercenContext(taskId=json.loads(e.value))
+else:
+    
+    ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 
 
