@@ -27,14 +27,14 @@ ctx = context.TercenContext()
 #   ctx2 <- tercenCtx(taskId = task_siblings_id)
 # }
 if not ctx.task is None:
-    envDict = ctx.task.environment
+    envPairs = ctx.task.environment
     ctx.log("Printing environment")
-    for e in envDict:
+    for e in envPairs:
         if isinstance(e, Pair):
             ctx.log(str(e.key))
             if e.key == "task.siblings.id":
                 ctx.log(str(e.value))
-                ctx2 = context.TercenContext(taskId=e.value[0])
+                ctx2 = context.TercenContext(taskId=e.value)
 
 
 
