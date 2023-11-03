@@ -33,8 +33,10 @@ if not ctx.task is None:
         if isinstance(e, Pair):
             ctx.log(str(e.key))
             if e.key == "task.siblings.id":
-                ctx.log(str(json.loads(e.value)))
-                ctx2 = context.TercenContext(taskId=json.loads(e.value))
+
+                print("{}".format(e.value))
+                print("{}".format(e.value[0]))
+                ctx2 = context.TercenContext(taskId=e.value[0])
 else:
     
     ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
