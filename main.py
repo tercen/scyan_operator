@@ -66,9 +66,10 @@ annRowDf = annRowDf.with_columns(pl.Series(name=".ri", values=range(0,len(annRow
 annDf = annDf.join(annColDf, on=".ci").join(annRowDf, ".ri")
 annDf = annDf.drop([".ri", ".ci"])
 
+annRowDf = annRowDf.drop([".ri"])
+annColDf = annColDf.drop([".ci"])
 
-
-annDfP = annDf.pivot(columns=annDf.columns[1], index=annDf.columns[2], values=annDf.columns[0])
+annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=annDf.columns[0])
 annDfP = annDfP.with_columns(pl.all().fill_null(strategy="zero"))
 
 
@@ -81,8 +82,11 @@ population = annDfP[:,0].to_numpy()
 ctx.log("Printing Markers")
 ctx.log(' '.join(markers))
 
-ctx.log("Printing annDfP columns")
+ctx.log("Printing yDfP columns")
 ctx.log(', '.join(yDfP.columns[1:]))
+
+ctx.log("Printing annDfP columns")
+ctx.log(', '.join(annDfP.columns[1:]))
 
 ctx.log("Printing annDf columns")
 ctx.log(', '.join(annDf.columns))
