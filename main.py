@@ -82,7 +82,7 @@ ctx.log("Printing Markers")
 ctx.log(' '.join(markers))
 
 ctx.log("Printing annDfP columns")
-ctx.log(' '.join(annDfP.columns[1:]))
+ctx.log(', '.join(yDfP.columns[1:]))
 
 
 adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
