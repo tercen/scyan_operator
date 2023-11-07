@@ -28,18 +28,12 @@ ctx = context.TercenContext()
 # }
 if not ctx.task is None:
     envPairs = ctx.task.environment
-    ctx.log("Printing environment")
+
     for e in envPairs:
         if isinstance(e, Pair):
             ctx.log(str(e.key))
             if str(e.key) == "task.siblings.id":
-                ctx.log("Found task ID {}".format(e.value))
-                ctx.log("{}".format(e.value))
-                ctx.log("{}".format(e.value[0]))
                 ctx2 = context.TercenContext(taskId=e.value)
- 
-
-                ctx.log(str(ctx2))
 
                 if ctx2 is None:
                     ctx.log("Failed to create context 2")
@@ -50,10 +44,6 @@ else:
     
     ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
-ctx.log("After init")
-ctx.log(' '.join(ctx2.names))
-ctx.log(' '.join(ctx2.cnames))
-ctx.log(' '.join(ctx2.rnames))
 
 
 
@@ -93,15 +83,21 @@ yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.column
 
 markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[1:])
 population = annDfP[:,0].to_numpy()
- 
+
+ctx.log("Printing Markers")
+ctx.log(' '.join(markers))
+
+ctx.log("Printing annDfP columns")
+ctx.log(' '.join(annDfP.columns[1:]))
+
 
 adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
 
 adata.var = pd.DataFrame(yDfP.columns[1:]).rename(columns={0:"Markers"})
 adata.var_names = yDfP.columns[1:]
 
-# FIXME HArcoded columns
-adata.obs = pd.DataFrame(yDfP["asinh..rowId"]).rename(columns={0:"Observation"})
+
+adata.obs = pd.DataFrame(yDf.columns[1]).rename(columns={0:"Observation"})
 #tadata.obs_names =  tmp["Observation"].to_numpy() 
 
 
