@@ -69,7 +69,13 @@ annDf = annDf.drop([".ri", ".ci"])
 annRowDf = annRowDf.drop([".ri"])
 annColDf = annColDf.drop([".ci"])
 
-annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=annDf.columns[0])
+ctx.log("Printing annColDf columns")
+ctx.log(', '.join(annColDf.columns))
+
+ctx.log("Printing annRowDf columns")
+ctx.log(', '.join(annRowDf.columns))
+
+annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
 annDfP = annDfP.with_columns(pl.all().fill_null(strategy="zero"))
 
 
