@@ -75,7 +75,12 @@ ctx.log(', '.join(annColDf.columns))
 ctx.log("Printing annRowDf columns")
 ctx.log(', '.join(annRowDf.columns))
 
-annDfP = annDf.pivot(columns=annRowDf.columns[0], index=annColDf.columns[0], values=".y")
+#FIXME Columns and rows are seemingly flipped when creating the context through
+# taskID. Check what is going on; Possible solutions to try
+# 1. Flip MultiDataStep1 projection
+# 2. Check the code and flip annRow and annCol
+# 3. Check if the construction of the conext object is correct (for taskId only)
+annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
 annDfP = annDfP.with_columns(pl.all().fill_null(strategy="zero"))
 
 
