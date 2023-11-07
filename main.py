@@ -14,18 +14,12 @@ from scyan.utils import _get_subset_indices
 # Create Unit Tests
 # Add/Read parameter to pass to Scyan function
 
-# http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/928e597a-9ced-4ef1-a985-eb1180fe19b4
+# http://127.0.0.1:5400/test/w/e2a9ef1dc04be286be60a5082d013ce8/ds/928e597a-9ced-4ef1-a985-eb1180fe19b4
 # ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
 
 ctx = context.TercenContext()
 
-# if(is.null(ctx$task)) {
-#   stop("task is null")
-# } else {
-#   pair <- Find(function(pair) identical(pair$key, "task.siblings.id"), ctx$task$environment)
-#   task_siblings_id <- jsonlite::fromJSON(pair$value)
-#   ctx2 <- tercenCtx(taskId = task_siblings_id)
-# }
+
 if not ctx.task is None:
     envPairs = ctx.task.environment
 
@@ -48,7 +42,7 @@ else:
 
 
 # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
-# ctx2 = context.TercenContext(workflowId="c3ffce4e7131bfb88740387170013cd3", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
+# ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 
 yDf = ctx.select([".y", ".ci", ".ri"])
@@ -96,8 +90,8 @@ adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
 adata.var = pd.DataFrame(yDfP.columns[1:]).rename(columns={0:"Markers"})
 adata.var_names = yDfP.columns[1:]
 
-
-adata.obs = pd.DataFrame(yDf.columns[1]).rename(columns={0:"Observation"})
+#yDfP["asinh..rowId"]
+adata.obs = pd.DataFrame(yDfP[yDf.columns[1]]).rename(columns={0:"Observation"})
 #tadata.obs_names =  tmp["Observation"].to_numpy() 
 
 
