@@ -51,8 +51,9 @@ else:
     ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 ctx.log("After init")
-ctx.log(ctx2.names)
-ctx.log(ctx2.cnames)
+ctx.log(' '.join(ctx2.names))
+ctx.log(' '.join(ctx2.cnames))
+ctx.log(' '.join(ctx2.rnames))
 
 
 
