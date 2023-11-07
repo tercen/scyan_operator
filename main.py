@@ -44,8 +44,6 @@ if not ctx.task is None:
                 if ctx2 is None:
                     ctx.log("Failed to create context 2")
 
-
-                ctx.log(str(ctx2.select([".y"])))
  
                 #docker run --rm --init --memory 1124m --memory-swap 1124m --memory-swappiness 0 --name=tercen_task_a9a0da8626f5c8b833542660f200a193 --env TERCEN_SERVICE_URI=http://172.42.0.42:5400 --env TERCEN_WEB_APP_PORT=8080 tercen/scyan_operator:latest --taskId a9a0da8626f5c8b833542660f200a193 --serviceUri http://172.42.0.42:5400 --token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RlcmNlbi5jb20iLCJleHAiOjE2OTkxMTE2ODcsImRhdGEiOnsiZCI6IiIsInUiOiJ0ZXN0IiwiZSI6MTY5OTExMTY4NzA4NH19.xvySAwvnrv-Sg9LY6lH0vwYA8tPBPNHLQOuuU8MQMP0[0m
 else:
