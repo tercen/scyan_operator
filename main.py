@@ -29,8 +29,12 @@ if not ctx.task is None:
                 ctx.log("Found task sibling")
                 
                 ctx.log(str(e.value))
-                ctx.log(e.value)
+                ctx.log(e.value[0])
+                ctx.log(e.value[1])
                 ctx.log("JSON")
+                ctx.log(','.join(e.value))
+
+                ctx.log(e.toJson()["value"])
                 ctx.log("{}".format(e.value))
                
                 ctx2 = context.TercenContext(taskId="{}".format(e.value))
