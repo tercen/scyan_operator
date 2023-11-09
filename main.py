@@ -28,16 +28,13 @@ if not ctx.task is None:
             if str(e.key) == "task.siblings.id":
                 ctx.log("Found task sibling")
                 
+                nChar = len(e.value)
+                taskId = e.value[2:(nChar-1)]
                 ctx.log(str(e.value))
-                ctx.log(e.value[0])
-                ctx.log(e.value[1])
-                ctx.log("JSON")
-                ctx.log(','.join(e.value))
-
-                ctx.log(e.toJson()["value"])
-                ctx.log("{}".format(e.value))
+                ctx.log(taskId)
+  
                
-                ctx2 = context.TercenContext(taskId="{}".format(e.value))
+                ctx2 = context.TercenContext(taskId=taskId)
 
                 if ctx2 is None:
                     ctx.log("Failed to create context 2")
