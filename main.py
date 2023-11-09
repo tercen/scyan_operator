@@ -25,13 +25,9 @@ if not ctx.task is None:
     for e in envPairs:
         if isinstance(e, Pair):
             ctx.log(str(e.key))
-            if str(e.key) == "task.siblings.id":
-                ctx.log("Found task sibling")
-                
+            if str(e.key) == "task.siblings.id":                
                 nChar = len(e.value)
                 taskId = e.value[2:(nChar-2)]
-                ctx.log(str(e.value))
-                ctx.log(taskId)
   
                
                 ctx2 = context.TercenContext(taskId=taskId)
@@ -65,12 +61,6 @@ yDf = yDf.drop([".ri", ".ci"])
 
 annDf = ctx2.select([".y", ".ci", ".ri"])
 
-ctx.log("Printing annDf A columns")
-ctx.log(', '.join(annDf.columns))
-
-ctx.log("Printing annDf")
-ctx.log(str(annDf.head()))
-
 annColDf = ctx2.cselect([""])
 annColDf = annColDf.with_columns(pl.Series(name=".ci", values=range(0,len(annColDf)), dtype=pl.Int32))
 
@@ -89,11 +79,6 @@ ctx.log(', '.join(annColDf.columns))
 ctx.log("Printing annRowDf columns")
 ctx.log(', '.join(annRowDf.columns))
 
-#FIXME Columns and rows are seemingly flipped when creating the context through
-# taskID. Check what is going on; Possible solutions to try
-# 1. Flip MultiDataStep1 projection NOT ISSUE
-# 2. Check the code and flip annRow and annCol NOT THE ISSUE
-# 3. Check if the construction of the conext object is correct (for taskId only)
 annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
 annDfP = annDfP.with_columns(pl.all().fill_null(strategy="zero"))
 
@@ -104,14 +89,6 @@ yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.column
 markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[1:])
 population = annDfP[:,0].to_numpy()
 
-ctx.log("Printing Markers")
-ctx.log(' '.join(markers))
-
-ctx.log("Printing yDfP columns")
-ctx.log(', '.join(yDfP.columns[1:]))
-
-#ctx.log("Printing annDfP columns")
-#ctx.log(', '.join(annDfP.columns[1:]))
 
 ctx.log("Printing annDf columns")
 ctx.log(', '.join(annDf.columns))
@@ -122,18 +99,18 @@ adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
 adata.var = pd.DataFrame(yDfP.columns[1:]).rename(columns={0:"Markers"})
 adata.var_names = yDfP.columns[1:]
 
-#yDfP["asinh..rowId"]
 adata.obs = pd.DataFrame(yDfP[yDf.columns[1]]).rename(columns={0:"Observation"})
-#tadata.obs_names =  tmp["Observation"].to_numpy() 
+
 
 
 tablePd = annDfP.select(markers).to_pandas()
 tablePd.index = annDfP["Population"].to_numpy()
 
 model = scyan.Scyan(adata=adata, table=tablePd )
+ctx.log("Performing model fit")
 model.fit()
 
-
+ctx.log("Performing predict")
 model.predict()
 
 
@@ -152,10 +129,12 @@ presentPopNames = model.adata[indices].obs["scyan_pop"].cat.categories.to_list()
 #scyan.plot.pop_expressions(model, model.pop_names[4])
 outDf = None
 
+ctx.log("Creating outDf")
 prob_name = "Prob"
 for i in range(0, len(presentPopNames)):
     popName = presentPopNames[i]
 
+    ctx.log(popName)
     u = model(model.adata.obs["scyan_pop"] == popName)
     log_probs = model.module.prior.log_prob_per_marker(u)
     mean_log_probs = log_probs.mean(dim=0).numpy(force=True)
