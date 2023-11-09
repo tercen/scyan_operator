@@ -35,9 +35,9 @@ if not ctx.task is None:
                     ctx.log("Failed to create context 2")
 
  
-                #docker run --rm --init --memory 1124m --memory-swap 1124m --memory-swappiness 0 --name=tercen_task_a9a0da8626f5c8b833542660f200a193 --env TERCEN_SERVICE_URI=http://172.42.0.42:5400 --env TERCEN_WEB_APP_PORT=8080 tercen/scyan_operator:latest --taskId a9a0da8626f5c8b833542660f200a193 --serviceUri http://172.42.0.42:5400 --token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RlcmNlbi5jb20iLCJleHAiOjE2OTkxMTE2ODcsImRhdGEiOnsiZCI6IiIsInUiOiJ0ZXN0IiwiZSI6MTY5OTExMTY4NzA4NH19.xvySAwvnrv-Sg9LY6lH0vwYA8tPBPNHLQOuuU8MQMP0[0m
+                
 else:
-    # Raise error
+    # TODO Raise error
     ctx2 = None
     # ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
