@@ -1,5 +1,5 @@
 from tercen.client import context as context
-from tercen.model.base import Pair
+from tercen.util import helper_functions as hlp
 import numpy as np
 import polars as pl
 import pandas as pd
@@ -15,7 +15,7 @@ from scyan.utils import _get_subset_indices
 # Add/Read parameter to pass to Scyan function
 
 # http://127.0.0.1:5400/test/w/e2a9ef1dc04be286be60a5082d013ce8/ds/928e597a-9ced-4ef1-a985-eb1180fe19b4
-# ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
+# 
 
 ctx = context.TercenContext()
 
@@ -44,8 +44,8 @@ else:
 
 
 
-
-# http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
+# ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
+# # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
 # ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 
@@ -134,7 +134,7 @@ prob_name = "Prob"
 for i in range(0, len(presentPopNames)):
     popName = presentPopNames[i]
 
-    ctx.log(popName)
+    
     u = model(model.adata.obs["scyan_pop"] == popName)
     log_probs = model.module.prior.log_prob_per_marker(u)
     mean_log_probs = log_probs.mean(dim=0).numpy(force=True)
@@ -170,27 +170,11 @@ for i in range(0, len(presentPopNames)):
             else:
                 outDf = pd.concat([outDf, df])
 
-
-
+#TODO Turn into relation
+ctx.log("Saving outDf")
 outDf = ctx.add_namespace(outDf) 
+
 ctx.save(outDf)
-
-#ctx = tercenCtx()
-#ctx$task$siblings$id
-# MultiStep step2
-# http://127.0.0.1:5400/test/w/462bec31fcad0c7eb8af65440e003fc9/ds/3edda5da-633d-42ab-bf20-2488e909b21e
-# ctx2 = tercenCtx(workflowId = "462bec31fcad0c7eb8af65440e003fc9", stepId = "3edda5da-633d-42ab-bf20-2488e909b21e")
+# ctx.save(outDf)
 
 
-
-# df = (
-#     tercenCtx
-#     .select(['.y', '.ci', '.ri'])
-#     .groupby(['.ci','.ri'], as_index=False)
-#     .mean()
-#     .rename(columns={".y":"mean"})
-#     .astype({".ci": np.int32, ".ri": np.int32})
-# )
-
-# df = tercenCtx.add_namespace(df) 
-# tercenCtx.save(df)
