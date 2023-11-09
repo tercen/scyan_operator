@@ -29,7 +29,7 @@ if not ctx.task is None:
                 ctx.log("Found task sibling")
                 
                 nChar = len(e.value)
-                taskId = e.value[2:(nChar-1)]
+                taskId = e.value[2:(nChar-2)]
                 ctx.log(str(e.value))
                 ctx.log(taskId)
   
