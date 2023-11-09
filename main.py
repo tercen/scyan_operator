@@ -1,5 +1,6 @@
 from tercen.client import context as context
 from tercen.util import helper_functions as hlp
+from tercen.model.base import Pair
 import numpy as np
 import polars as pl
 import pandas as pd
