@@ -31,9 +31,9 @@ if not ctx.task is None:
                 ctx.log(str(e.value))
                 ctx.log(e.value)
                 ctx.log("JSON")
-                ctx.log(json.loads(e.value))
+                ctx.log(json.loads(e.value[0]))
                
-                ctx2 = context.TercenContext(taskId=e.value)
+                ctx2 = context.TercenContext(taskId=json.loads(e.value[0]))
 
                 if ctx2 is None:
                     ctx.log("Failed to create context 2")
