@@ -30,6 +30,8 @@ if not ctx.task is None:
                 ctx.log("Found task sibling")
                 eJson = e.toJson()
                 ctx.log(str(eJson["value"]))
+                ctx.log(eJson["value"].__class__)
+                ctx.log(eJson["value"][0])
                 ctx2 = context.TercenContext(taskId=str(eJson["value"]))
 
                 if ctx2 is None:
