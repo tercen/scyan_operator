@@ -29,7 +29,7 @@ if not ctx.task is None:
             if str(e.key) == "task.siblings.id":
                 ctx.log("Found task sibling")
                 
-                ctx.log(e.value.__class__)
+                ctx.log(str(e.value.__class__))
                 ctx.log(str(e.value))
                 ctx2 = context.TercenContext(taskId=str(e.value))
 
