@@ -19,7 +19,6 @@ from scyan.utils import _get_subset_indices
 
 ctx = context.TercenContext()
 
-
 if not ctx.task is None:
     envPairs = ctx.task.environment
 
@@ -29,9 +28,12 @@ if not ctx.task is None:
             if str(e.key) == "task.siblings.id":
                 ctx.log("Found task sibling")
                 
-                ctx.log(str(e.value.__class__))
                 ctx.log(str(e.value))
-                ctx2 = context.TercenContext(taskId=str(e.value))
+                ctx.log(e.value)
+                ctx.log("JSON")
+                ctx.log(json.loads(e.value))
+               
+                ctx2 = context.TercenContext(taskId=e.value)
 
                 if ctx2 is None:
                     ctx.log("Failed to create context 2")
