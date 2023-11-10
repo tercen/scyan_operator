@@ -5,5 +5,54 @@
     "authors": ["tercen"],
     "urls": ["https://github.com/tercen/scyan_operator"],
     "container":"tercen/scyan_operator:latest",
-    "properties": [ ]
+    "properties": [ 
+        {
+            "kind": "DoubleProperty",
+            "name": "PriorSD",
+            "defaultValue": 0.3,
+            "description": "Standard deviation sigma of the cell-specific random variable H."
+        },
+        {
+            "kind": "DoubleProperty",
+            "name": "LR",
+            "defaultValue": 0.0005,
+            "description": "Model Learning rate."
+        },
+        {
+            "kind": "DoubleProperty",
+            "name": "Layers",
+            "defaultValue": 7,
+            "description": "Number of coupling layers."
+        },
+        {
+            "kind": "DoubleProperty",
+            "name": "Hidden Layers",
+            "defaultValue": 6,
+            "description": "Number of hidden layers in the MLP."
+        },
+        {
+            "kind": "DoubleProperty",
+            "name": "Hidden Size",
+            "defaultValue": 16,
+            "description": "Hidden size of the MLP (`s`, `t`)."
+        },
+        {
+            "kind": "DoubleProperty",
+            "name": "Temperature",
+            "defaultValue": 0.5,
+            "description": "Temperature to favor small populations."
+        },
+        {
+            "kind": "DoubleProperty",
+            "name": "Batch Size",
+            "defaultValue": 8192,
+            "description": "Model batch size."
+        },
+        {
+            "kind": "StringProperty",
+            "name": "WarmUp",
+            "defaultValue": "(0.35,4)",
+            "description": "Sets the model prior standard deviation to `max(warm_up[0], prior_std)` during the first `warm_up[1]` epochs."
+        }
+    ]
 }

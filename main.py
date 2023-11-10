@@ -5,7 +5,7 @@ import numpy as np
 import polars as pl
 import pandas as pd
 import scyan, anndata
-import matplotlib
+import matplotlib, string
 matplotlib.use('Agg')
 
 from scyan.utils import _get_subset_indices
@@ -75,11 +75,6 @@ annDf = annDf.drop([".ri", ".ci"])
 annRowDf = annRowDf.drop([".ri"])
 annColDf = annColDf.drop([".ci"])
 
-ctx.log("Printing annColDf columns")
-ctx.log(', '.join(annColDf.columns))
-
-ctx.log("Printing annRowDf columns")
-ctx.log(', '.join(annRowDf.columns))
 
 annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
 annDfP = annDfP.with_columns(pl.all().fill_null(strategy="zero"))
@@ -90,10 +85,6 @@ yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.column
 
 markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[1:])
 population = annDfP[:,0].to_numpy()
-
-
-ctx.log("Printing annDf columns")
-ctx.log(', '.join(annDf.columns))
 
 
 adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
@@ -108,7 +99,25 @@ adata.obs = pd.DataFrame(yDfP[yDf.columns[1]]).rename(columns={0:"Observation"})
 tablePd = annDfP.select(markers).to_pandas()
 tablePd.index = annDfP["Population"].to_numpy()
 
-model = scyan.Scyan(adata=adata, table=tablePd )
+priorSd = ctx.operator_property('PriorSD', typeFn=float, default=0.3)
+lr = ctx.operator_property('LR', typeFn=float, default=0.0005)
+nLayers = ctx.operator_property('Layers', typeFn=int, default=7)
+nHiddenLayers = ctx.operator_property('Hidden Layers', typeFn=int, default=6)
+hiddenSz = ctx.operator_property('Hidden Size', typeFn=int, default=16)
+temperature = ctx.operator_property('Temperature', typeFn=float, default=0.5)
+moduloTemp = ctx.operator_property('Modulo Temp', typeFn=int, default=3)
+batchSize = ctx.operator_property('Batch Size', typeFn=int, default=8192)
+warmUp = ctx.operator_property('WarmUp', typeFn=str, default="(0.35,4)")
+w1 = float(warmUp.split(",")[0].replace("(", "").strip())
+w2 = float(warmUp.split(",")[1].replace(")", "").strip())
+
+model = scyan.Scyan(adata=adata, table=tablePd, \
+                    prior_std=priorSd, lr=lr, n_layers=nLayers, \
+                    n_hidden_layers=nHiddenLayers, \
+                    hidden_size=hiddenSz, temperature=temperature, \
+                    batch_size=batchSize, modulo_temp=moduloTemp, \
+                    warm_up=(w1, w2) )
+
 ctx.log("Performing model fit")
 model.fit()
 
