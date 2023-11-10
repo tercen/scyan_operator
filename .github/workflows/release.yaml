@@ -42,14 +42,14 @@ jobs:
           docker push $DOCKER_IMAGE:latest
       - name: Pull tercenctl
         run: docker pull tercen/tercenctl:release
-      - name: Install operator
-        run: |
-          docker run --rm \
-            -e TERCEN_USERNAME=${{ secrets.TERCEN_TEST_OPERATOR_USERNAME }} \
-            -e TERCEN_PASSWORD=${{ secrets.TERCEN_TEST_OPERATOR_PASSWORD }} \
-            -e TERCEN_URI=${{ secrets.TERCEN_TEST_OPERATOR_URI }} \
-            -e GITHUB_TOKEN=${GITHUB_TOKEN} \
-            tercen/tercenctl:release operator install --rm --tag ${TAG} --repo ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
+      # - name: Install operator
+      #   run: |
+      #     docker run --rm \
+      #       -e TERCEN_USERNAME=${{ secrets.TERCEN_TEST_OPERATOR_USERNAME }} \
+      #       -e TERCEN_PASSWORD=${{ secrets.TERCEN_TEST_OPERATOR_PASSWORD }} \
+      #       -e TERCEN_URI=${{ secrets.TERCEN_TEST_OPERATOR_URI }} \
+      #       -e GITHUB_TOKEN=${GITHUB_TOKEN} \
+      #       tercen/tercenctl:release operator install --rm --tag ${TAG} --repo ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
       - name: Create required package.json
         run: echo '{}' > package.json
       - name: Build changelog
