@@ -5,7 +5,8 @@ import numpy as np
 import polars as pl
 import pandas as pd
 import scyan, anndata
-import json
+import matplotlib
+matplotlib.use('Agg')
 
 from scyan.utils import _get_subset_indices
 
@@ -163,7 +164,7 @@ for i in range(0, len(presentPopNames)):
             continue
         pDf = df_probs[rowNames[ri]]
         for k in range(0, len(pDf)):
-            df = pd.DataFrame([[ri, pDf[k],  popName, model.pop_names[k] ]], columns=['.ri','LogProb','InterpretPop', 'Population'])
+            df = pd.DataFrame([[ri, pDf.iloc[k],  popName, model.pop_names[k] ]], columns=['.ri','LogProb','InterpretPop', 'Population'])
             df = df.astype({".ri": np.int32, "LogProb": np.float64})
             
             if outDf is None:
@@ -176,6 +177,6 @@ ctx.log("Saving outDf")
 outDf = ctx.add_namespace(outDf) 
 
 ctx.save(outDf)
-# ctx.save(outDf)
+
 
 
