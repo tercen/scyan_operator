@@ -48,7 +48,7 @@ else:
 
 
 # ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
-# # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
+# # # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
 # ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 
@@ -141,6 +141,7 @@ logProbs = model.module.prior.log_prob(u)
 ctx.log("Creating output table")
 outDf = None
 dfList = [None] * len(adata.obs_names)
+dfList2 = [None] * (len(adata.obs_names)*len(population))
 for i in range(0, len(adata.obs_names)):
     
     model.adata.obs["scyan_pop"].iloc[i].__class__
@@ -148,23 +149,32 @@ for i in range(0, len(adata.obs_names)):
         pop = model.adata.obs["scyan_pop"].iloc[i] 
     else:
         pop = "None"
-    tmpDf = pl.DataFrame({".ci":int(i), "Population":pop })
+    tmpDf = pl.DataFrame({".ci":int(i), "Population":pop, \
+                          "MaxLogProb":np.max(logProbs[i,:].tolist())  })
     logPops = logProbs[i,:].tolist()
+    
     for p in population:
-        tmpDf = tmpDf.with_columns(\
-            new_col = pl.lit(logPops.pop(0)) \
-            ).with_columns(pl.col("new_col").alias(p))
+        tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
+                               "LogProb":logPops.pop(0)})
+
+        dfList2[i] = tmpDf2
         
     dfList[i] = tmpDf
+    
     # if outDf is None:
     #     outDf = tmpDf
     # else:
     #     outDf = pl.concat([outDf, tmpDf])
 
 outDf =  pl.concat(dfList)
+outDf2 =  pl.concat(dfList2)
 dfList.clear()
+dfList2.clear()
+
 outDf = outDf.with_columns(pl.col(".ci").cast(pl.Int32))
-outDf = outDf.drop("new_col")
+# outDf2 = outDf2.drop("new_col")
+
+outDf2 = outDf2.with_columns(pl.col(".ci").cast(pl.Int32))
 # not_na = ~model.adata.obs["scyan_pop"].isna()
 # indices = _get_subset_indices(not_na.sum(), 200000)
 # indices = np.where(not_na)[0][indices]
@@ -226,8 +236,9 @@ outDf = outDf.drop("new_col")
 # 3 - Save
 ctx.log("Saving outDf")
 outDf = ctx.add_namespace(outDf) 
+outDf2 = ctx.add_namespace(outDf2) 
 
-ctx.save(outDf)
+ctx.save([outDf, outDf2])
 
 
 
