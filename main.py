@@ -142,6 +142,7 @@ ctx.log("Creating output table")
 outDf = None
 dfList = [None] * len(adata.obs_names)
 dfList2 = [None] * (len(adata.obs_names)*len(population))
+idx = 0
 for i in range(0, len(adata.obs_names)):
     
     model.adata.obs["scyan_pop"].iloc[i].__class__
@@ -157,7 +158,8 @@ for i in range(0, len(adata.obs_names)):
         tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
                                "LogProb":logPops.pop(0)})
 
-        dfList2[i] = tmpDf2
+        dfList2[idx] = tmpDf2
+        idx = idx + 1
         
     dfList[i] = tmpDf
     
