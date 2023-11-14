@@ -6,6 +6,7 @@ import polars as pl
 import pandas as pd
 import scyan, anndata
 import matplotlib
+import math
 matplotlib.use('Agg')
 
 from scyan.utils import _get_subset_indices
@@ -136,9 +137,12 @@ fakeSeries[0] = True
 u = model(fakeSeries)
 logProbs = model.module.prior.log_prob(u)
 
+
+ctx.log("Creating output table")
 outDf = None
+dfList = [None] * len(adata.obs_names)
 for i in range(0, len(adata.obs_names)):
-    import math
+    
     model.adata.obs["scyan_pop"].iloc[i].__class__
     if isinstance( model.adata.obs["scyan_pop"].iloc[i], str ):
         pop = model.adata.obs["scyan_pop"].iloc[i] 
@@ -149,15 +153,18 @@ for i in range(0, len(adata.obs_names)):
     for p in population:
         tmpDf = tmpDf.with_columns(\
             new_col = pl.lit(logPops.pop(0)) \
-            ).with_columns(pl.col("new_col").alias(p)).drop("new_col")
+            ).with_columns(pl.col("new_col").alias(p))
         
-                
-    if outDf is None:
-        outDf = tmpDf
-    else:
-        outDf = pl.concat([outDf, tmpDf])
+    dfList[i] = tmpDf
+    # if outDf is None:
+    #     outDf = tmpDf
+    # else:
+    #     outDf = pl.concat([outDf, tmpDf])
 
+outDf =  pl.concat(dfList)
+dfList.clear()
 outDf = outDf.with_columns(pl.col(".ci").cast(pl.Int32))
+outDf = outDf.drop("new_col")
 # not_na = ~model.adata.obs["scyan_pop"].isna()
 # indices = _get_subset_indices(not_na.sum(), 200000)
 # indices = np.where(not_na)[0][indices]
