@@ -153,10 +153,11 @@ for i in range(0, len(adata.obs_names)):
     tmpDf = pl.DataFrame({".ci":int(i), "Population":pop, \
                           "MaxLogProb":np.max(logProbs[i,:].tolist())  })
     logPops = logProbs[i,:].tolist()
-    
+    probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
     for p in population:
         tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
-                               "LogProb":logPops.pop(0)})
+                               "LogProb":logPops.pop(0), \
+                                "Prob":probs.pop(0)})
 
         dfList2[idx] = tmpDf2
         idx = idx + 1
