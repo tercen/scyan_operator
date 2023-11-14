@@ -19,36 +19,36 @@ from scyan.utils import _get_subset_indices
 # http://127.0.0.1:5400/test/w/e2a9ef1dc04be286be60a5082d013ce8/ds/928e597a-9ced-4ef1-a985-eb1180fe19b4
 # 
 
-# ctx = context.TercenContext()
+ctx = context.TercenContext()
 
-# if not ctx.task is None:
-#     envPairs = ctx.task.environment
+if not ctx.task is None:
+    envPairs = ctx.task.environment
 
-#     for e in envPairs:
-#         if isinstance(e, Pair):
-#             ctx.log(str(e.key))
-#             if str(e.key) == "task.siblings.id":                
-#                 nChar = len(e.value)
-#                 taskId = e.value[2:(nChar-2)]
+    for e in envPairs:
+        if isinstance(e, Pair):
+            ctx.log(str(e.key))
+            if str(e.key) == "task.siblings.id":                
+                nChar = len(e.value)
+                taskId = e.value[2:(nChar-2)]
   
                
-#                 ctx2 = context.TercenContext(taskId=taskId)
+                ctx2 = context.TercenContext(taskId=taskId)
 
-#                 if ctx2 is None:
-#                     ctx.log("Failed to create context 2")
+                if ctx2 is None:
+                    ctx.log("Failed to create context 2")
 
  
                 
-# else:
-#     # TODO Raise error
-#     ctx2 = None
-#     # ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
+else:
+    # TODO Raise error
+    ctx2 = None
+    # ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 
 
-ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
+# ctx = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="928e597a-9ced-4ef1-a985-eb1180fe19b4")
 # # http://127.0.0.1:5400/test/w/c3ffce4e7131bfb88740387170013cd3/ds/5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995
-ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
+# ctx2 = context.TercenContext(workflowId="e2a9ef1dc04be286be60a5082d013ce8", stepId="5d51ba5d-8fba-4978-9fc1-3b5d2ccbe995")
 
 
 yDf = ctx.select([".y", ".ci", ".ri"])
