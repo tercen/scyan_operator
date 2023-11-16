@@ -150,7 +150,7 @@ for i in range(0, len(adata.obs_names)):
         pop = model.adata.obs["scyan_pop"].iloc[i] 
     else:
         pop = "None"
-    tmpDf = pl.DataFrame({".ci":int(i), "Population":pop, \
+    tmpDf = pl.DataFrame({".ci":int(i), "PredictedPopulation":pop, \
                           "MaxLogProb":np.max(logProbs[i,:].tolist())  })
     logPops = logProbs[i,:].tolist()
     probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
