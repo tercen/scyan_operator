@@ -1,86 +1,32 @@
 
-# Template Python Operator
+# scyan
 
-Cell-wise mean calculated implemented in Python.
+#### Description
 
-## Python operator - Development workflow
+`scyan` operator performs cell annotation and debarcoding.
 
-* Set up [the Tercen Studio development environment](https://github.com/tercen/tercen_studio)
-* Create a new git repository based on the [template Python operator](https://github.com/tercen/template-python-operator)
-* Open VS Code Server by going to: http://127.0.0.1:8443
-* Clone this repository into VS Code (using the 'Clone from GitHub' command from the Command Palette for example)
-* Load the environment and install core requirements by running the following commands in the terminal:
+#### Usage
 
-```bash
-source /config/.pyenv/versions/3.9.0/bin/activate
-pip install -r requirements.txt
-```
+Input Step 1|.
+---|---
+`row`   | represents the variables (e.g. markers, channels)
+`col`   | represents the observations (e.g. event IDs) 
+`y-axis`| measurement value
 
-* Develop your operator. Note that you can interact with an existing data step by specifying arguments to the `TercenContext` function:
-
-```python
-tercenCtx = ctx.TercenContext()
-```
-
-```python
-tercenCtx = ctx.TercenContext(
-    workflowId="YOUR_WORKFLOW_ID",
-    stepId="YOUR_STEP_ID",
-    username="admin", # if using the local Tercen instance
-    password="admin", # if using the local Tercen instance
-    serviceUri = "http://127.0.0.1:5400/" # if using the local Tercen instance 
-)
-```
-
-* Generate requirements
-
-```bash
-python3 -m tercen.util.requirements . > requirements.txt
-```
-
-* Push your changes to GitHub: triggers CI GH workflow
-* Tag the repository: triggers Release GH workflow
-* Go to tercen and install your operator
+Input Step 2|.
+---|---
+`row`   | represents the variables (e.g. markers, channels)
+`col`   | represents the observations (e.g. event IDs) 
+`y-axis`| measurement value
 
 
-## Helpful Commands
+Output|.
+---|---
+`PredictedPopulation`| Scores on the principal components 1..maxComp, i.e. the data projected on the principal components.
 
-### Install Tercen Python Client
 
-```bash
-python3 -m pip install --force git+https://github.com/tercen/tercen_python_client@0.7.1
-```
+#### Reference
 
-### Wheel
+[Blampey et al., 2023, A biology-driven deep generative model for cell-type annotation in cytometry, Briefings in Bioinformatics, Volume 24, Issue 5, September 2023, bbad260](https://doi.org/10.1093/bib/bbad260)
 
-Though not strictly mandatory, many packages require it.
-
-```bash
-python3 -m pip install wheel
-```
-
-### VSCode Launch
-
-To run and debug the code, `VSCode` requires a launch.json file, which will be automatically created.
-If the generated file does not run properly within the virtual environment, use the one below:
-
-```JSON
-{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "python": "PATH TO VENV PYTHON",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "env": { "PYTHONPATH": "${workspaceRoot}"}
-            
-        }
-    ]
-}
-```
-
-    
+[scyan](https://github.com/MICS-Lab/scyan) is distributed under [this BSD 3-Clause License](https://github.com/MICS-Lab/scyan/blob/ae0d612ecd6f59cd9a95127198d6c6f5700f1975/LICENSE).

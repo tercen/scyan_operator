@@ -1,7 +1,7 @@
 {
-    "name": "Scyan Operator",
-    "description": "Tercen wrapper for the Scyan operator",
-    "tags": ["python", "scyan"],
+    "name": "Scyan",
+    "description": "Cell population annotation and debarcoding.",
+    "tags": ["flow cytometry", "annotation", "clustering"],
     "authors": ["tercen"],
     "urls": ["https://github.com/tercen/scyan_operator"],
     "container":"tercen/scyan_operator:latest",
