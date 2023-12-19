@@ -77,8 +77,7 @@ adata.obs_names = yDfP[yDf.columns[1]]
 tablePd = annDfP.select(markers).to_pandas()
 tablePd.index = annDfP["Population"].to_numpy()
 
-
-
+fullOutput = ctx.operator_property('FullOutput', typeFn=bool, default=false)
 priorSd = ctx.operator_property('PriorSD', typeFn=float, default=0.3)
 lr = ctx.operator_property('LR', typeFn=float, default=0.0005)
 nLayers = ctx.operator_property('Layers', typeFn=int, default=7)
@@ -124,29 +123,34 @@ for i in range(0, len(adata.obs_names)):
         pop = "None"
     tmpDf = pl.DataFrame({".ci":int(i), "PredictedPopulation":pop, \
                           "MaxLogProb":np.max(logProbs[i,:].tolist())  })
-    logPops = logProbs[i,:].tolist()
-    probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
-    for p in population:
-        tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
-                               "LogProb":logPops.pop(0), \
-                                "Prob":probs.pop(0)})
+    
+    if fullOutput:
+        logPops = logProbs[i,:].tolist()
+        probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
+        for p in population:
+            tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
+                                "LogProb":logPops.pop(0), \
+                                    "Prob":probs.pop(0)})
 
-        dfList2[idx] = tmpDf2
-        idx = idx + 1
+            dfList2[idx] = tmpDf2
+            idx = idx + 1
         
     dfList[i] = tmpDf
 
-outDf =  pl.concat(dfList)
-outDf2 =  pl.concat(dfList2)
-dfList.clear()
-dfList2.clear()
-
-outDf = outDf.with_columns(pl.col(".ci").cast(pl.Int32))
-
-outDf2 = outDf2.with_columns(pl.col(".ci").cast(pl.Int32))
 
 ctx.log("Saving outDf")
-outDf = ctx.add_namespace(outDf) 
-outDf2 = ctx.add_namespace(outDf2) 
 
-ctx.save([outDf, outDf2])
+outDf =  pl.concat(dfList)
+dfList.clear()
+outDf = outDf.with_columns(pl.col(".ci").cast(pl.Int32))
+outDf = ctx.add_namespace(outDf) 
+
+if fullOutput:
+    outDf2 =  pl.concat(dfList2)
+    dfList2.clear()
+    outDf2 = outDf2.with_columns(pl.col(".ci").cast(pl.Int32))
+    outDf2 = ctx.add_namespace(outDf2) 
+    ctx.save([outDf, outDf2])
+
+else:
+    ctx.save([outDf])

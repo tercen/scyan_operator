@@ -53,6 +53,12 @@
             "name": "WarmUp",
             "defaultValue": "(0.35,4)",
             "description": "Sets the model prior standard deviation to `max(warm_up[0], prior_std)` during the first `warm_up[1]` epochs."
+        },
+        {
+            "kind": "BooleanProperty",
+            "name": "FullOutput",
+            "defaultValue": false,
+            "description": "Whether to output event-level probabilities or not. Requires more resources."
         }
     ]
 }
