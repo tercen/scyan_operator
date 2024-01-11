@@ -57,7 +57,6 @@ annRowDf = annRowDf.drop([".ri"])
 annColDf = annColDf.drop([".ci"])
 
 annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
-annDfP = annDfP.with_columns(pl.all().fill_null(strategy="zero"))
 
 yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.columns[0]  ) #[:,1:]
 
@@ -93,7 +92,6 @@ warmUp = ctx.operator_property('WarmUp', typeFn=str, default="(0.35,4)")
 w1 = float(warmUp.split(",")[0].replace("(", "").strip())
 w2 = float(warmUp.split(",")[1].replace(")", "").strip())
 
-tablePd = tablePd.replace(0, None)
 model = scyan.Scyan(adata=adata, table=tablePd, \
                     prior_std=priorSd, lr=lr, n_layers=nLayers, \
                     n_hidden_layers=nHiddenLayers, \
