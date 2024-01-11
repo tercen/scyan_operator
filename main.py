@@ -77,7 +77,10 @@ adata.obs_names = yDfP[yDf.columns[1]]
 tablePd = annDfP.select(markers).to_pandas()
 tablePd.index = annDfP["Population"].to_numpy()
 
-fullOutput = ctx.operator_property('FullOutput', typeFn=bool, default=false)
+def tercenBool(x):
+    return x == 'true'
+fullOutput = ctx.operator_property('FullOutput', typeFn=tercenBool, default=False)
+
 priorSd = ctx.operator_property('PriorSD', typeFn=float, default=0.3)
 lr = ctx.operator_property('LR', typeFn=float, default=0.0005)
 nLayers = ctx.operator_property('Layers', typeFn=int, default=7)
@@ -90,6 +93,7 @@ warmUp = ctx.operator_property('WarmUp', typeFn=str, default="(0.35,4)")
 w1 = float(warmUp.split(",")[0].replace("(", "").strip())
 w2 = float(warmUp.split(",")[1].replace(")", "").strip())
 
+tablePd = tablePd.replace(0, None)
 model = scyan.Scyan(adata=adata, table=tablePd, \
                     prior_std=priorSd, lr=lr, n_layers=nLayers, \
                     n_hidden_layers=nHiddenLayers, \
@@ -116,7 +120,7 @@ dfList2 = [None] * (len(adata.obs_names)*len(population))
 idx = 0
 for i in range(0, len(adata.obs_names)):
     
-    model.adata.obs["scyan_pop"].iloc[i].__class__
+    # model.adata.obs["scyan_pop"].iloc[i].__class__
     if isinstance( model.adata.obs["scyan_pop"].iloc[i], str ):
         pop = model.adata.obs["scyan_pop"].iloc[i] 
     else:
