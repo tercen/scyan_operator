@@ -3,13 +3,16 @@ from tercen.model.impl import Pair
 import numpy as np
 import polars as pl
 import pandas as pd
-import scyan, anndata
+import scyan, anndata, os
 import matplotlib
 matplotlib.use('Agg')
 
+#http://127.0.0.1:5400/test/w/5409bc1875748e715c48848fd3004e42/ds/1ba15732-ba1e-400c-828d-8e542decfc5c
+#http://127.0.0.1:5400/test/w/5409bc1875748e715c48848fd3004e42/ds/9deae2f2-b062-46bd-a36b-8d5c445e3d4b
+# ctx = context.TercenContext(workflowId="5409bc1875748e715c48848fd3004e42",\
+                            #  stepId="1ba15732-ba1e-400c-828d-8e542decfc5c")
 
 ctx = context.TercenContext()
-
 
 if not ctx.task is None:
     envPairs = ctx.task.environment
@@ -28,6 +31,8 @@ if not ctx.task is None:
 
 else:
     ctx2 = None
+    # ctx2 = context.TercenContext(workflowId="5409bc1875748e715c48848fd3004e42",\
+                                #   stepId="9deae2f2-b062-46bd-a36b-8d5c445e3d4b")
 
 
 
@@ -109,10 +114,15 @@ model = scyan.Scyan(adata=adata, table=tablePd, \
                     batch_size=batchSize, modulo_temp=moduloTemp, \
                     warm_up=(w1, w2) )
 
-
-
+nCpus = 0
+if ctx.task != None:
+    nCpus = int(ctx.task.environment["cpu"])
+    
+if nCpus == 0:
+    
+    nCpus = os.cpu_count()
 ctx.log("Fitting model...")
-model.fit()
+model.fit(num_workers=nCpus )
 
 ctx.log("Predicting cell populations...")
 model.predict()
