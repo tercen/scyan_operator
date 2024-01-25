@@ -155,7 +155,7 @@ for i in range(0, len(popLabels)):
             pop = "None"
         tmpDf = pl.DataFrame({".ci":int(i), "PredictedPopulation":pop, \
                             "MaxLogProb":np.max(logProbs[i,:].tolist()),\
-                            "Level":tercenColName  })
+                            "Level":i  })
         
         if fullOutput:
             logPops = logProbs[i,:].tolist()
@@ -164,7 +164,7 @@ for i in range(0, len(popLabels)):
                 tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
                                     "LogProb":logPops.pop(0), \
                                         "Prob":probs.pop(0),\
-                                        "Level":tercenColName})
+                                        "Level":i})
 
                 dfList2[idx] = tmpDf2
                 idx = idx + 1
