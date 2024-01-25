@@ -1,15 +1,11 @@
 from tercen.client import context as context
-from tercen.util import helper_functions as hlp
-from tercen.model.base import Pair
+from tercen.model.impl import Pair
 import numpy as np
 import polars as pl
 import pandas as pd
 import scyan, anndata
 import matplotlib
-import math
 matplotlib.use('Agg')
-
-from scyan.utils import _get_subset_indices
 
 ctx = context.TercenContext()
 
@@ -30,6 +26,7 @@ if not ctx.task is None:
 
 else:
     ctx2 = None
+
 
 yDf = ctx.select([".y", ".ci", ".ri"])
 colDf = ctx.cselect([""])
@@ -56,11 +53,15 @@ annDf = annDf.drop([".ri", ".ci"])
 annRowDf = annRowDf.drop([".ri"])
 annColDf = annColDf.drop([".ci"])
 
-annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
+# CHange
+#annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
+annDfP = annDf.pivot(columns=annColDf.columns[0:1], index=annRowDf.columns, values=".y", aggregate_function='first')
 
-yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.columns[0]  ) #[:,1:]
+yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.columns[0], aggregate_function='first'  ) #[:,1:]
 
-markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[1:])
+# Change
+markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[2:])
+#markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[2:])
 population = annDfP[:,0].to_numpy()
 
 
@@ -73,9 +74,18 @@ adata.obs = pd.DataFrame(yDfP[yDf.columns[1]]).rename(columns={0:"Observation"})
 adata.obs_names = yDfP[yDf.columns[1]]
 
 
-tablePd = annDfP.select(markers).to_pandas()
-tablePd.index = annDfP["Population"].to_numpy()
+# Population -> Highest variance : Leaves in the hierarchy tree
 
+tablePd = annDfP.select(markers).to_pandas()
+
+for i in range(0, len(ctx2.rnames)):
+    if i == 0: # Always call this level population
+        tablePd["Population"] = annDfP[ctx2.rnames[i]].to_numpy()
+    else:
+        tablePd[ctx2.rnames[i]] = annDfP[ctx2.rnames[i]].to_numpy() 
+
+#tablePd[["Population", "level"]].astype('category')#.cat.codes.unstack()
+tablePd = tablePd.set_index(ctx2.rnames)
 def tercenBool(x):
     return x == 'true'
 fullOutput = ctx.operator_property('FullOutput', typeFn=tercenBool, default=False)
@@ -99,45 +109,68 @@ model = scyan.Scyan(adata=adata, table=tablePd, \
                     batch_size=batchSize, modulo_temp=moduloTemp, \
                     warm_up=(w1, w2) )
 
+
+
 ctx.log("Fitting model...")
 model.fit()
 
 ctx.log("Predicting cell populations...")
 model.predict()
 
-fakeSeries = model.adata.obs["scyan_pop"] != 'NoPop'
-fakeSeries[0] = True
-u = model(fakeSeries)
-logProbs = model.module.prior.log_prob(u)
 
-
-ctx.log("Creating output table")
 outDf = None
-dfList = [None] * len(adata.obs_names)
-dfList2 = [None] * (len(adata.obs_names)*len(population))
-idx = 0
-for i in range(0, len(adata.obs_names)):
-    
-    # model.adata.obs["scyan_pop"].iloc[i].__class__
-    if isinstance( model.adata.obs["scyan_pop"].iloc[i], str ):
-        pop = model.adata.obs["scyan_pop"].iloc[i] 
-    else:
-        pop = "None"
-    tmpDf = pl.DataFrame({".ci":int(i), "PredictedPopulation":pop, \
-                          "MaxLogProb":np.max(logProbs[i,:].tolist())  })
-    
-    if fullOutput:
-        logPops = logProbs[i,:].tolist()
-        probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
-        for p in population:
-            tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
-                                "LogProb":logPops.pop(0), \
-                                    "Prob":probs.pop(0)})
+dfList = [None] * len(adata.obs_names) * len(model.level_names)
+if fullOutput:
+    dfList2 = [None] * (len(adata.obs_names)*len(population))*len(model.level_names) # 2 -> levels
+pop_idx = 0
 
-            dfList2[idx] = tmpDf2
-            idx = idx + 1
+popLabels = [""]
+[popLabels.append(l) for l in model.level_names]
+
+
+for i in range(0, len(popLabels)):
+    popLabel = popLabels[i]
+    tercenColName = ctx2.rnames[i]
+    if popLabel == "":
+        outColName = "scyan_pop"
+    else:
+        outColName = "scyan_pop_{}".format(popLabel)
+
+    fakeSeries = model.adata.obs[outColName] != 'NoPop'
+    fakeSeries[0] = True
+    u = model(fakeSeries)
+    logProbs = model.module.prior.log_prob(u)
+
+
+    ctx.log("Creating output table")
+
+    idx = 0
+    
+    for i in range(0, len(adata.obs_names)):
         
-    dfList[i] = tmpDf
+        # model.adata.obs["scyan_pop"].iloc[i].__class__
+        if isinstance( model.adata.obs[outColName].iloc[i], str ):
+            pop = model.adata.obs[outColName].iloc[i] 
+        else:
+            pop = "None"
+        tmpDf = pl.DataFrame({".ci":int(i), "PredictedPopulation":pop, \
+                            "MaxLogProb":np.max(logProbs[i,:].tolist()),\
+                            "Level":tercenColName  })
+        
+        if fullOutput:
+            logPops = logProbs[i,:].tolist()
+            probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
+            for p in population:
+                tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
+                                    "LogProb":logPops.pop(0), \
+                                        "Prob":probs.pop(0),\
+                                        "Level":tercenColName})
+
+                dfList2[idx] = tmpDf2
+                idx = idx + 1
+            
+        dfList[pop_idx] = tmpDf
+        pop_idx = pop_idx + 1
 
 
 ctx.log("Saving outDf")

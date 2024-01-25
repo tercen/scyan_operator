@@ -15,7 +15,7 @@ Input Step 1|.
 
 Input Step 2|.
 ---|---
-`row`   | represents the variables (e.g. markers, channels)
+`row`   | represents the variables (e.g. markers, channels). May have multiple factors to indicate hierarchy. The leftmost factor is considered the lowest levels (i.e. most detailed / leaves) of the population hierarchy tree.
 `col`   | represents the observations (e.g. event IDs) 
 `y-axis`| measurement value
 
