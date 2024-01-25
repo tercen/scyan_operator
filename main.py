@@ -89,7 +89,7 @@ for i in range(0, len(ctx2.rnames)):
     else:
         tablePd[ctx2.rnames[i]] = annDfP[ctx2.rnames[i]].to_numpy() 
 
-#tablePd[["Population", "level"]].astype('category')#.cat.codes.unstack()
+tablePd[ctx2.rnames] = tablePd[ctx2.rnames].astype('category')#.cat.codes.unstack()
 tablePd = tablePd.set_index(ctx2.rnames)
 def tercenBool(x):
     return x == 'true'
@@ -114,15 +114,10 @@ model = scyan.Scyan(adata=adata, table=tablePd, \
                     batch_size=batchSize, modulo_temp=moduloTemp, \
                     warm_up=(w1, w2) )
 
-nCpus = 0
-if ctx.task != None:
-    nCpus = int(ctx.task.environment["cpu"])
-    
-if nCpus == 0:
-    
-    nCpus = os.cpu_count()
+
 ctx.log("Fitting model...")
-model.fit(num_workers=nCpus )
+model.fit( )
+# model.fit(num_workers=nCpus )
 
 ctx.log("Predicting cell populations...")
 model.predict()
