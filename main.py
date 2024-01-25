@@ -117,7 +117,7 @@ model = scyan.Scyan(adata=adata, table=tablePd, \
 
 ctx.log("Fitting model...")
 model.fit( )
-# model.fit(num_workers=nCpus )
+
 
 ctx.log("Predicting cell populations...")
 model.predict()
