@@ -7,7 +7,9 @@ import scyan, anndata
 import matplotlib
 matplotlib.use('Agg')
 
+
 ctx = context.TercenContext()
+
 
 if not ctx.task is None:
     envPairs = ctx.task.environment
@@ -26,6 +28,7 @@ if not ctx.task is None:
 
 else:
     ctx2 = None
+
 
 
 yDf = ctx.select([".y", ".ci", ".ri"])
@@ -53,15 +56,13 @@ annDf = annDf.drop([".ri", ".ci"])
 annRowDf = annRowDf.drop([".ri"])
 annColDf = annColDf.drop([".ci"])
 
-# CHange
-#annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns[0], values=".y")
-annDfP = annDf.pivot(columns=annColDf.columns[0:1], index=annRowDf.columns, values=".y", aggregate_function='first')
+
+annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns, values=".y", aggregate_function='first')
 
 yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.columns[0], aggregate_function='first'  ) #[:,1:]
 
-# Change
-markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[2:])
-#markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[2:])
+
+markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[len(ctx2.rnames):])
 population = annDfP[:,0].to_numpy()
 
 
@@ -75,7 +76,6 @@ adata.obs_names = yDfP[yDf.columns[1]]
 
 
 # Population -> Highest variance : Leaves in the hierarchy tree
-
 tablePd = annDfP.select(markers).to_pandas()
 
 for i in range(0, len(ctx2.rnames)):
