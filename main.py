@@ -119,8 +119,8 @@ model.predict()
 
 
 outDf = None
-dfList = [None] * len(adata.obs_names) * len(model.level_names)
-if fullOutput:
+dfList = [None] * len(adata.obs_names) * (len(model.level_names)+1)
+if fullOutput == True:
     dfList2 = [None] * (len(adata.obs_names)*len(population))*len(model.level_names) # 2 -> levels
 pop_idx = 0
 
