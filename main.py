@@ -124,15 +124,19 @@ model.predict()
 
 
 outDf = None
-dfList = [None] * len(adata.obs_names) * (len(model.level_names)+1)
+dfList = [None] * len(adata.obs_names) 
 if fullOutput == True:
-    dfList2 = [None] * (len(adata.obs_names)*len(population))*len(model.level_names) # 2 -> levels
-pop_idx = 0
+    dfList2 = [None] * (len(adata.obs_names)*len(population)) # 2 -> levels
+
 
 popLabels = [""]
 [popLabels.append(l) for l in model.level_names]
 
 
+logProbsList = []
+outColNames = []
+tercenColNames = []
+ctx.log("Calculating population probabilities")
 for i in range(0, len(popLabels)):
     popLabel = popLabels[i]
     tercenColName = ctx2.rnames[i]
@@ -141,41 +145,56 @@ for i in range(0, len(popLabels)):
     else:
         outColName = "scyan_pop_{}".format(popLabel)
 
+    outColNames.append(outColName)
+    tercenColNames.append(tercenColName)
     fakeSeries = model.adata.obs[outColName] != 'NoPop'
     fakeSeries[0] = True
     u = model(fakeSeries)
-    logProbs = model.module.prior.log_prob(u)
+
+    logProbsList.append( model.module.prior.log_prob(u))
 
 
-    ctx.log("Creating output table")
+ctx.log("Creating output tables")
 
-    idx = 0
+idx = -1
     
-    for i in range(0, len(adata.obs_names)):
-        
-        # model.adata.obs["scyan_pop"].iloc[i].__class__
+for i in range(0, len(adata.obs_names)):
+    tmpDf = pl.DataFrame({".ci":int(i) })
+
+    for j in range(0, len(popLabels)):
+        outColName = outColNames[j]
+        tercenColName = tercenColNames[j]
+        logProbs = logProbsList[j]
         if isinstance( model.adata.obs[outColName].iloc[i], str ):
             pop = model.adata.obs[outColName].iloc[i] 
         else:
             pop = "None"
-        tmpDf = pl.DataFrame({".ci":int(i), "PredictedPopulation":pop, \
-                            "MaxLogProb":np.max(logProbs[i,:].tolist()),\
-                            "Level":tercenColName  })
-        
+
+        tmpDf = tmpDf.with_columns(pl.lit(pop).alias("PredictedPopulation_{}".format(tercenColName) ) ).\
+                      with_columns(pl.lit(np.max(logProbs[i,:].tolist())).alias("MaxLogProb_{}".format(tercenColName) ) )
+    
         if fullOutput:
+            tmpDf2 = pl.DataFrame({".ci":int(i)})
             logPops = logProbs[i,:].tolist()
             probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
             for p in population:
-                tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
-                                    "LogProb":logPops.pop(0), \
-                                        "Prob":probs.pop(0),\
-                                        "Level":tercenColName})
+                                # tmpDf2 = pl.DataFrame({".ci":int(i), "Population":p, \
+                                #     "LogProb":logPops.pop(0), \
+                                #         "Prob":probs.pop(0),\
+                                #         "Level":tercenColName})
+                tmpDf2 = pl.DataFrame({".ci":int(i)})
+                tmpDf2.with_columns(pl.lit(logPops.pop(0)).alias("LogProb_{}".format(tercenColName))).\
+                    with_columns(pl.lit(probs.pop(0)).alias("Prob_{}".format(tercenColName))).\
+                    with_columns(pl.lit(p).alias("Population_{}".format(tercenColName)))
 
+
+                if j == 0:
+                    idx = idx + 1
                 dfList2[idx] = tmpDf2
-                idx = idx + 1
-            
-        dfList[pop_idx] = tmpDf
-        pop_idx = pop_idx + 1
+                
+        
+    dfList[i] = tmpDf
+    
 
 
 ctx.log("Saving outDf")
