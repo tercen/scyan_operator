@@ -10,7 +10,6 @@ matplotlib.use('Agg')
 def tercenBool(x):
     return x == 'true'
 
-
 ctx = context.TercenContext()
 
 if not ctx.task is None:
@@ -84,7 +83,7 @@ yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.column
 
 
 markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[len(ctx2.rnames):])
-# population = annDfP[:,0].to_numpy()
+priorPop = annDfP[:,0].to_numpy()
 
 adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
 
@@ -124,12 +123,15 @@ model.fit(  )
 ctx.log("Predicting cell populations...")
 model.predict()
 
-outDf = None
-
 ctx.log("Calculating population probabilities")
 outDf = None
-for j in range(0, len(model.level_names)):
-    popLabel = model.level_names[j]
+outDf2 = None
+
+populations = [""]
+[populations.append(p) for p in model.level_names]
+
+for j in range(0, len(populations)):
+    popLabel = populations[j]
     tercenColName = ctx2.rnames[j]
     if popLabel == "":
         outColName = "scyan_pop"
@@ -141,8 +143,10 @@ for j in range(0, len(model.level_names)):
     logProbs = model.module.prior.log_prob(model(fakeSeries))
 
     dfList = [] 
-    # if fullOutput == True:
-    #     dfList2 = [] # * (len(adata.obs_names)*len(population)) # 2 -> levels
+    dfList2 = [] 
+
+    
+        
 
     predColName = "PredictedPopulation_{}".format(tercenColName)
     predMaxLogProbName  = "MaxLogProb_{}".format(tercenColName)
@@ -158,8 +162,21 @@ for j in range(0, len(model.level_names)):
         tmpDf = tmpDf.with_columns(pl.lit(pop).alias(predColName ) ).\
                     with_columns(pl.lit(np.max(logProbs[i,:].tolist())).alias(predMaxLogProbName ) )
         
-
         dfList.append(tmpDf)
+
+        if fullOutput == True:
+            logPops = logProbs[i,:].tolist()
+            probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
+            tmpDf2 = pl.DataFrame({".ci":int(i) })
+
+            predProbName = "Prob_{}".format(tercenColName)
+            predLogProbName  = "LogProb_{}".format(tercenColName)
+
+            for p in priorPop:
+                tmpDf2 = tmpDf2.with_columns(pl.lit(logPops.pop(0)).alias(predLogProbName ) ).\
+                            with_columns(pl.lit(probs.pop(0)).alias(predProbName ) )
+                dfList2.append(tmpDf2)
+
 
     if outDf is None:
         outDf = pl.concat(dfList)
@@ -167,13 +184,17 @@ for j in range(0, len(model.level_names)):
         outDf = outDf.join(  pl.concat(dfList), on=".ci" ) 
     dfList = None
 
+    if fullOutput == True:
+        if outDf2 is None:
+            outDf2 = pl.concat(dfList2)
+        else:
+            outDf2 = outDf2.join(  pl.concat(dfList2), on=".ci" ) 
+        dfList2 = None
     
-model = None
 
+    
 ctx.log("Saving outDf")
 
-# outDf =  pl.concat(dfList)
-# dfList.clear()
 outDf = outDf.with_columns(pl.col(".ci").cast(pl.Int32))
 outDf = ctx.add_namespace(outDf) 
 
