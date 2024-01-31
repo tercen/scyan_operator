@@ -7,16 +7,11 @@ import scyan, anndata
 import matplotlib
 matplotlib.use('Agg')
 
-from memory_profiler import profile
-
 def tercenBool(x):
     return x == 'true'
 
 
-ctx = context.TercenContext(workflowId="5409bc1875748e715c48848fd3004e42",\
-                            stepId="1ba15732-ba1e-400c-828d-8e542decfc5c")
-
-# ctx = context.TercenContext()
+ctx = context.TercenContext()
 
 if not ctx.task is None:
     envPairs = ctx.task.environment
@@ -53,7 +48,7 @@ w2 = float(warmUp.split(",")[1].replace(")", "").strip())
 
 yDf = ctx.select([".y", ".ci", ".ri"])
 colDf = ctx.cselect([""])
-# colDf = colDf.select(pl.col(colDf.columns[0]).cast(pl.Int32).apply(hex) )
+
 
 colDf = colDf.select('o' + pl.col(colDf.columns[0]).cast(pl.Int32).cast(pl.Utf8))
 colDf = colDf.with_columns(pl.Series(name=".ci", values=range(0,len(colDf) ), dtype=pl.Int32) )
