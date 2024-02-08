@@ -1,3 +1,3 @@
-git+https://github.com/tercen/tercen_python_client@0.10.2
+git+https://github.com/tercen/tercen_python_client@0.10.3
 scyan==1.5.*
 pyarrow==13.0.*
