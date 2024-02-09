@@ -1,0 +1,91 @@
+{
+ "kind": "TableSchema",
+ "id": "a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "poised_data_redux.csv",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [
+  {
+   "kind": "Pair",
+   "key": "SHA256",
+   "value": "a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506"
+  }
+ ],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "7",
+ "nRows": 8147724,
+ "columns": [
+  {
+   "kind": "ColumnSchema",
+   "id": "81b620cc-c46f-4bce-98e7-20ebc0361e52",
+   "name": "row_id",
+   "type": "double",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "b37c1d13-8687-4827-b456-c952c509e1c0",
+   "name": "Marker",
+   "type": "string",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "10f18280-9b39-4d43-8126-efe42b6c2260",
+   "name": "Measurement",
+   "type": "double",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  }
+ ],
+ "dataDirectory": "data/a3/98/a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506",
+ "relation": {
+  "kind": "Relation",
+  "id": "cfdc5923-9299-4d33-ba02-373b65ad6ddc"
+ }
+}

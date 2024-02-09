@@ -1,0 +1,30 @@
+{
+ "kind": "Project",
+ "id": "",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": "https://github.com/tercen/scyan_operator"
+ },
+ "version": "dd66274cfeca88860820a8b12819397eea68bf21",
+ "isPublic": false
+}

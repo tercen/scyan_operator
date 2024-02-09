@@ -1,0 +1,42 @@
+{
+ "kind": "FileDocument",
+ "id": ".github/workflows/release.yaml",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "release.yaml",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "2",
+ "dataUri": "d6/91/d691d66f1d1efe9d1580aa9f7e8b754c84d5dbf8c5357913b89bd6710177c667",
+ "metadata": {
+  "kind": "FileMetadata",
+  "contentType": "",
+  "cacheControl": "",
+  "contentEncoding": "",
+  "contentLanguage": "",
+  "md5Hash": ""
+ },
+ "size": 0
+}

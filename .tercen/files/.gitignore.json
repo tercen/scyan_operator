@@ -1,0 +1,42 @@
+{
+ "kind": "FileDocument",
+ "id": ".gitignore",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": ".gitignore",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "",
+ "dataUri": "48/72/4872c0b55edc90122276924f2c65bf941fb753f82c91916ce41dc4f6f752aaa6",
+ "metadata": {
+  "kind": "FileMetadata",
+  "contentType": "",
+  "cacheControl": "",
+  "contentEncoding": "",
+  "contentLanguage": "",
+  "md5Hash": ""
+ },
+ "size": 0
+}

@@ -1,0 +1,42 @@
+{
+ "kind": "FileDocument",
+ "id": "setup_venv.sh",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "setup_venv.sh",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "",
+ "dataUri": "46/4d/464dd26a91fb8a6813f56c77436567b0368270e42864ad644cde3288b5671093",
+ "metadata": {
+  "kind": "FileMetadata",
+  "contentType": "",
+  "cacheControl": "",
+  "contentEncoding": "",
+  "contentLanguage": "",
+  "md5Hash": ""
+ },
+ "size": 0
+}

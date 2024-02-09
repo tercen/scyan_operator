@@ -1,0 +1,121 @@
+{
+ "kind": "TableSchema",
+ "id": "f0ab8b2cecbc15e799ad22ecb96d76b642abe99270171b6272a63862c3edc39d",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "hierarchy_ann.csv",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [
+  {
+   "kind": "Pair",
+   "key": "SHA256",
+   "value": "f0ab8b2cecbc15e799ad22ecb96d76b642abe99270171b6272a63862c3edc39d"
+  }
+ ],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "7",
+ "nRows": 494,
+ "columns": [
+  {
+   "kind": "ColumnSchema",
+   "id": "9b309eb4-e732-4698-a0dc-ecc54008ceba",
+   "name": "row_id",
+   "type": "double",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "6fce437c-ef65-48cf-9159-0e590ae50a7c",
+   "name": "Marker",
+   "type": "string",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "87db9a3d-4681-4c1a-84d9-be8cdbe427b3",
+   "name": "Measurement",
+   "type": "double",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "433510bf-a4ef-49cb-b8b7-2ea36d5657c5",
+   "name": "level",
+   "type": "string",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "cacc37e1-7750-4d3f-b807-5c2e2753d518",
+   "name": "Population",
+   "type": "string",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  }
+ ],
+ "dataDirectory": "data/f0/ab/f0ab8b2cecbc15e799ad22ecb96d76b642abe99270171b6272a63862c3edc39d",
+ "relation": {
+  "kind": "Relation",
+  "id": "eba8194c-fd4c-4117-b6a9-46bf26f13fd5"
+ }
+}

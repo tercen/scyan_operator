@@ -1,0 +1,201 @@
+{
+ "kind": "ComputedTableSchema",
+ "id": "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [
+  {
+   "kind": "Pair",
+   "key": "SHA256",
+   "value": "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde"
+  }
+ ],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "",
+ "nRows": 8147724,
+ "columns": [
+  {
+   "kind": "ColumnSchema",
+   "id": "a5f4c78f-2420-4c88-89c3-e2c80dd2cd27",
+   "name": ".ri",
+   "type": "int32",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "b2dd2270-c2ec-4bd1-98e0-a560af6a19fb",
+   "name": ".ci",
+   "type": "int32",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  },
+  {
+   "kind": "ColumnSchema",
+   "id": "9342b5e3-2f28-4e01-ab9c-84da4608bcfc",
+   "name": "ds0.asinh",
+   "type": "double",
+   "nRows": 0,
+   "size": -1,
+   "metaData": {
+    "kind": "ColumnSchemaMetaData",
+    "sort": [],
+    "ascending": true,
+    "quartiles": [],
+    "properties": []
+   }
+  }
+ ],
+ "dataDirectory": "data/b5/07/b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde",
+ "relation": {
+  "kind": "Relation",
+  "id": "c6b77732-2a95-4efc-8695-36e160e1e6ce"
+ },
+ "query": {
+  "kind": "CubeQuery",
+  "relation": {
+   "kind": "RenameRelation",
+   "id": "4b78727b-1b5d-4f72-ae6a-fc0d66aa41ef",
+   "relation": {
+    "kind": "SimpleRelation",
+    "id": "a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506",
+    "index": 0
+   },
+   "inNames": [
+    "row_id",
+    "Marker",
+    "Measurement",
+    "a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506._rids",
+    "a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506.tlbId"
+   ],
+   "outNames": [
+    "row_id",
+    "Marker",
+    "Measurement",
+    "rowId",
+    "tableId"
+   ]
+  },
+  "colColumns": [
+   {
+    "kind": "Factor",
+    "name": "row_id",
+    "type": "double"
+   }
+  ],
+  "rowColumns": [
+   {
+    "kind": "Factor",
+    "name": "Marker",
+    "type": "string"
+   }
+  ],
+  "axisQueries": [
+   {
+    "kind": "CubeAxisQuery",
+    "pointSize": 4,
+    "chartType": "point",
+    "yAxis": {
+     "kind": "Factor",
+     "name": "Measurement",
+     "type": "double"
+    },
+    "yAxisSettings": {
+     "kind": "AxisSettings",
+     "meta": []
+    },
+    "xAxis": {
+     "kind": "Factor",
+     "name": "",
+     "type": "string"
+    },
+    "xAxisSettings": {
+     "kind": "AxisSettings",
+     "meta": []
+    },
+    "errors": [],
+    "labels": [],
+    "colors": [],
+    "preprocessors": []
+   }
+  ],
+  "filters": {
+   "kind": "Filters",
+   "removeNaN": true,
+   "namedFilters": []
+  },
+  "operatorSettings": {
+   "kind": "OperatorSettings",
+   "namespace": "ds0",
+   "operatorRef": {
+    "kind": "OperatorRef",
+    "name": "asinh",
+    "version": "1.1.0",
+    "operatorId": "5",
+    "operatorKind": "ROperator",
+    "propertyValues": [
+     {
+      "kind": "PropertyValue",
+      "name": "scale",
+      "value": "5"
+     }
+    ],
+    "url": {
+     "kind": "Url",
+     "uri": "https://github.com/tercen/asinh_operator"
+    },
+    "operatorSpec": {
+     "kind": "OperatorSpec",
+     "ontologyUri": "",
+     "ontologyVersion": "",
+     "inputSpecs": [],
+     "outputSpecs": []
+    }
+   },
+   "environment": [],
+   "operatorModel": {
+    "kind": "OperatorModel"
+   }
+  },
+  "qtHash": "",
+  "columnHash": "",
+  "rowHash": ""
+ }
+}

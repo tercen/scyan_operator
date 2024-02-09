@@ -1,0 +1,42 @@
+{
+ "kind": "FileDocument",
+ "id": ".dockerignore",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": ".dockerignore",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "",
+ "dataUri": "a1/9f/a19f3fd03ef3b0163e8fa38085d9e472972b41eacdf4b20caaed84153718b4c9",
+ "metadata": {
+  "kind": "FileMetadata",
+  "contentType": "",
+  "cacheControl": "",
+  "contentEncoding": "",
+  "contentLanguage": "",
+  "md5Hash": ""
+ },
+ "size": 0
+}

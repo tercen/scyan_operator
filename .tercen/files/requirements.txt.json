@@ -1,0 +1,42 @@
+{
+ "kind": "FileDocument",
+ "id": "requirements.txt",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "requirements.txt",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "",
+ "dataUri": "bb/15/bb15ae6f5a6d8dd4621eabe8fa6804ca614bfd13ee8fd1f0523755c83a9f3ed7",
+ "metadata": {
+  "kind": "FileMetadata",
+  "contentType": "",
+  "cacheControl": "",
+  "contentEncoding": "",
+  "contentLanguage": "",
+  "md5Hash": ""
+ },
+ "size": 0
+}

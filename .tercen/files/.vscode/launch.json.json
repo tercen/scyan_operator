@@ -1,0 +1,42 @@
+{
+ "kind": "FileDocument",
+ "id": ".vscode/launch.json",
+ "isDeleted": false,
+ "rev": "",
+ "description": "",
+ "name": "launch.json",
+ "acl": {
+  "kind": "Acl",
+  "owner": "",
+  "aces": []
+ },
+ "createdDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "lastModifiedDate": {
+  "kind": "Date",
+  "value": ""
+ },
+ "urls": [],
+ "tags": [],
+ "meta": [],
+ "url": {
+  "kind": "Url",
+  "uri": ""
+ },
+ "version": "",
+ "isPublic": false,
+ "projectId": "",
+ "folderId": "3",
+ "dataUri": "82/0f/820f045eca8f9bf1369685bb20adbb2d5355eabce0cd8b446b54eaa93f79fbec",
+ "metadata": {
+  "kind": "FileMetadata",
+  "contentType": "",
+  "cacheControl": "",
+  "contentEncoding": "",
+  "contentLanguage": "",
+  "md5Hash": ""
+ },
+ "size": 0
+}
