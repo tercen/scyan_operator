@@ -16,6 +16,9 @@
     "remoteEnv": {
       "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
     },
-    "postCreateCommand": "python3 -m pip install -r /workspaces/scyan_operator/requirements.txt"
+    "postCreateCommand": "python3 -m pip install -r /workspaces/scyan_operator/requirements.txt",
+    "features": {
+      "git-lfs": "latest"
+    }
 
   }

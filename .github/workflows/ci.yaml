@@ -27,7 +27,7 @@ jobs:
       - name: Test template 
         id: run_test
         run: |
-          docker run -t --net=host workflow_runner:latest \
+          docker run -t --net=host tercen/workflow_runner:latest \
             --templateRepo=${GITHUB_REPOSITORY} \
             --templateFolder=workflow_tests \
             --user=test \
