@@ -1,0 +1,13 @@
+{
+    "kind": "OperatorUnitTest",
+    "name": "test",
+    "namespace": "ds0",
+    "inputDataUri": "hospitals.csv",
+    "outputDataUri": ["Table_1.csv","Table_2.csv","Table_3.csv"],
+    "columns": ["Rating.Imaging"],
+    "rows": ["Rating.Effectiveness"],
+    "colors": ["Facility.Type"],
+    "labels": ["Facility.Name"],
+    "yAxis": "Procedure.Hip Knee.Cost",
+    "xAxis": ""
+  }

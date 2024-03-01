@@ -26,6 +26,7 @@ if not ctx.task is None:
 
                 if ctx2 is None:
                     ctx.log("Failed to create context 2")
+                    exit(code=0) 
 
 else:
     ctx2 = None
