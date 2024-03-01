@@ -29,7 +29,7 @@ jobs:
         run: |
           docker run -t --net=host tercen/workflow_runner:latest \
             --templateRepo=${GITHUB_REPOSITORY} \
-            --templateFolder=workflow_tests \
+            --templateFolder=test \
             --user=test \
             --passw=test \
             --serviceUri=http://127.0.0.1:5400 \
