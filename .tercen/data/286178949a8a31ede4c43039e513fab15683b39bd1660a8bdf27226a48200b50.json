@@ -1,10 +1,10 @@
 {
  "kind": "ComputedTableSchema",
- "id": "acc2b5413a773c2902bb8a1d0016a2e380686a83c9e8384adfb043fe78ede950",
+ "id": "286178949a8a31ede4c43039e513fab15683b39bd1660a8bdf27226a48200b50",
  "isDeleted": false,
  "rev": "",
  "description": "",
- "name": "",
+ "name": "2161f3f0-7e3a-1ef5-9fa5-77dfcf6ec3a6",
  "acl": {
   "kind": "Acl",
   "owner": "",
@@ -24,7 +24,7 @@
   {
    "kind": "Pair",
    "key": "SHA256",
-   "value": "acc2b5413a773c2902bb8a1d0016a2e380686a83c9e8384adfb043fe78ede950"
+   "value": "286178949a8a31ede4c43039e513fab15683b39bd1660a8bdf27226a48200b50"
   }
  ],
  "url": {
@@ -39,7 +39,7 @@
  "columns": [
   {
    "kind": "ColumnSchema",
-   "id": "2f37e996-cd51-4394-935f-74345c0d9840",
+   "id": "801487a6-2a7d-4839-b12c-9a8a09b637db",
    "name": ".ci",
    "type": "int32",
    "nRows": 0,
@@ -54,7 +54,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "a05ab293-9d8d-41ca-8e2f-dc929f5aba95",
+   "id": "fbbbb055-ed8d-4717-b148-bc88129fe7f3",
    "name": "ds1.PredictedPopulation_Population",
    "type": "string",
    "nRows": 0,
@@ -69,7 +69,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "16668779-14a2-47a0-bbc8-6ae47c2bcffd",
+   "id": "eacde291-e4c4-4690-9e7a-79bbce491191",
    "name": "ds1.MaxLogProb_Population",
    "type": "double",
    "nRows": 0,
@@ -84,7 +84,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "94edc92d-b702-4811-8eff-ed6a8c1e2d3b",
+   "id": "5fc21122-7cc0-41d6-9944-19b19e505f31",
    "name": "ds1.PredictedPopulation_level",
    "type": "string",
    "nRows": 0,
@@ -99,7 +99,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "1a743c9e-6bff-4a32-9ae2-f2839d330a49",
+   "id": "31423f40-ee17-4425-aef5-bedb98ed5d10",
    "name": "ds1.MaxLogProb_level",
    "type": "double",
    "nRows": 0,
@@ -113,19 +113,19 @@
    }
   }
  ],
- "dataDirectory": "data/ac/c2/acc2b5413a773c2902bb8a1d0016a2e380686a83c9e8384adfb043fe78ede950",
+ "dataDirectory": "data/28/61/286178949a8a31ede4c43039e513fab15683b39bd1660a8bdf27226a48200b50",
  "relation": {
   "kind": "Relation",
-  "id": "65a9ce25-0c29-4272-9511-93334d65934e"
+  "id": "ecc32d01-24b6-42bb-a36f-fbe40c1d8f2c"
  },
  "query": {
   "kind": "CubeQuery",
   "relation": {
    "kind": "RenameRelation",
-   "id": "8f132029-edb1-4729-b025-d799c0d16658",
+   "id": "664afa46-f044-459f-a6b7-672a5505031f",
    "relation": {
     "kind": "CompositeRelation",
-    "id": "25002246-87f3-47cd-9b32-385ffb4ad342",
+    "id": "0d800816-d51d-47cf-85c3-413bd709211f",
     "joinOperators": [
      {
       "kind": "JoinOperator",
@@ -148,7 +148,7 @@
     ],
     "mainRelation": {
      "kind": "CompositeRelation",
-     "id": "11eb6b5c-0fda-4579-9ec4-7ae96336c2a2",
+     "id": "1f61520d-5522-4f9f-a793-5121a5a3286c",
      "joinOperators": [
       {
        "kind": "JoinOperator",
@@ -261,8 +261,8 @@
    "operatorRef": {
     "kind": "OperatorRef",
     "name": "Scyan",
-    "version": "dd66274cfeca88860820a8b12819397eea68bf21",
-    "operatorId": "0",
+    "version": "36d2f763c028794f318ca2d0bf09706e7807ea85",
+    "operatorId": "10",
     "operatorKind": "DockerOperator",
     "propertyValues": [
      {
@@ -323,7 +323,33 @@
      "outputSpecs": []
     }
    },
-   "environment": [],
+   "environment": [
+    {
+     "kind": "Pair",
+     "key": "cpu",
+     "value": "0"
+    },
+    {
+     "kind": "Pair",
+     "key": "ram",
+     "value": "0"
+    },
+    {
+     "kind": "Pair",
+     "key": "cpu-shares",
+     "value": "0"
+    },
+    {
+     "kind": "Pair",
+     "key": "tercen.collect.stats",
+     "value": "false"
+    },
+    {
+     "kind": "Pair",
+     "key": "debug",
+     "value": "false"
+    }
+   ],
    "operatorModel": {
     "kind": "OperatorModel"
    }

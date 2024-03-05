@@ -1,6 +1,6 @@
 {
  "kind": "Workflow",
- "id": "6",
+ "id": "9",
  "isDeleted": false,
  "rev": "",
  "description": "",
@@ -28,7 +28,7 @@
  "version": "",
  "isPublic": false,
  "projectId": "",
- "folderId": "7",
+ "folderId": "5",
  "links": [
   {
    "kind": "Link",
@@ -289,7 +289,7 @@
       "kind": "OperatorRef",
       "name": "asinh",
       "version": "1.1.0",
-      "operatorId": "5",
+      "operatorId": "1",
       "operatorKind": "ROperator",
       "propertyValues": [
        {
@@ -975,5 +975,6 @@
   "kind": "Point",
   "x": 0.0,
   "y": 0.0
- }
+ },
+ "scale": 1.0
 }
