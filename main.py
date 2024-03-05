@@ -32,10 +32,6 @@ def tercen_float(x):
 def tercen_bool(x):
     return x == 'true'
 
-
-
-
-
 ctx = context.TercenContext()
 
 if not ctx.task is None:
@@ -61,7 +57,7 @@ else:
 
 
 
-
+#Dbg
 fullOutput = ctx.operator_property('FullOutput', typeFn=tercen_bool, default=False)
 priorSd = ctx.operator_property('PriorSD', typeFn=tercen_float, default=0.3)
 lr = ctx.operator_property('LR', typeFn=tercen_float, default=0.0005)
