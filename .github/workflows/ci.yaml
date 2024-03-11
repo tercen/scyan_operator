@@ -43,8 +43,7 @@ jobs:
           retention-days: 1
       - name: 'Create Tercen Logs'
         if: always()  
-        run: docker logs  start-tercen_tercen_1 > tercen_logs.log
-        shell: bash
+        run: docker logs start-tercen_tercen_1 
         working-directory: ${{ github.action_path }}
       - name: 'Upload Tercen Logs'
         if: always()
