@@ -32,6 +32,7 @@ jobs:
             --templateFolder=workflow_tests \
             --user=test \
             --passw=test \
+            --opMem=1500000000 \
             --serviceUri=http://127.0.0.1:5400 \
             --gitToken=${{ github.token }} 
       - name: 'Upload Artifact'
