@@ -42,9 +42,9 @@ jobs:
           path: test_results.json
           retention-days: 1
       - name: 'Upload Tercen Logs'
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: TercenLogs
-        path: ${{ github.action_path }}/tercen_logs.log
-        retention-days: 1
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: TercenLogs
+          path: ${{ github.action_path }}/tercen_logs.log
+          retention-days: 2
