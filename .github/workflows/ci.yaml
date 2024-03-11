@@ -41,6 +41,11 @@ jobs:
           name: TestResults
           path: test_results.json
           retention-days: 1
+      - name: 'Create Tercen Logs'
+        if: always()  
+        run: docker logs  start-tercen_tercen_1 > tercen_logs.log
+        shell: bash
+        working-directory: ${{ github.action_path }}
       - name: 'Upload Tercen Logs'
         if: always()
         uses: actions/upload-artifact@v3
