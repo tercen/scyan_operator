@@ -1,10 +1,10 @@
 {
  "kind": "CubeQueryTableSchema",
- "id": "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e",
+ "id": "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356",
  "isDeleted": false,
  "rev": "",
  "description": "",
- "name": "row",
+ "name": "column",
  "acl": {
   "kind": "Acl",
   "owner": "",
@@ -23,13 +23,8 @@
  "meta": [
   {
    "kind": "Pair",
-   "key": "Marker.size_in_bytes",
-   "value": "616"
-  },
-  {
-   "kind": "Pair",
    "key": "SHA256",
-   "value": "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e"
+   "value": "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356"
   }
  ],
  "url": {
@@ -40,13 +35,13 @@
  "isPublic": false,
  "projectId": "",
  "folderId": "",
- "nRows": 39,
+ "nRows": 500,
  "columns": [
   {
    "kind": "ColumnSchema",
-   "id": "52bea45e-be65-49b9-87b3-6c108fa96a31",
-   "name": "Marker",
-   "type": "string",
+   "id": "0ab434e9-da0e-4d80-9fd6-3216ff1bbe5d",
+   "name": "ds0..row_id",
+   "type": "double",
    "nRows": 0,
    "size": -1,
    "metaData": {
@@ -58,18 +53,18 @@
    }
   }
  ],
- "dataDirectory": "data/69/96/699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e",
+ "dataDirectory": "data/22/f7/22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356",
  "relation": {
   "kind": "Relation",
-  "id": "6e21aa07-0c79-4476-9807-e48e7f0d01d6"
+  "id": "26f85242-5f64-4d8b-a6dc-9f4191ae08ae"
  },
- "queryHash": "98a5e428e572fe826f3a041d9d017aad",
- "queryTableType": "row",
+ "queryHash": "d96353064e4e7999ffcb8067d519e592",
+ "queryTableType": "column",
  "query": {
   "kind": "CubeQuery",
   "relation": {
    "kind": "Relation",
-   "id": "490d6674-3b5b-4923-bca2-ce577cac0ed1"
+   "id": "ef311f8b-a684-419a-a3bc-f166641d93ba"
   },
   "colColumns": [],
   "rowColumns": [],

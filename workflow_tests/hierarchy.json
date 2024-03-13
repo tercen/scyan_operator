@@ -89,7 +89,7 @@
     "kind": "TableStepModel",
     "relation": {
      "kind": "UnionRelation",
-     "id": "df6a29f8-aaf2-47f2-b8cc-51d75e827589",
+     "id": "be9cb07c-10d3-4713-93f8-a946eb6ecc20",
      "relations": []
     }
    }
@@ -249,7 +249,7 @@
     },
     "columnTable": {
      "kind": "CrosstabTable",
-     "cellSize": 0.017920525360433804,
+     "cellSize": 0.48387034614896435,
      "offset": 0,
      "graphicalFactors": [
       {
@@ -275,12 +275,32 @@
       }
      ],
      "rectangleSelections": [],
-     "nRows": 208916
+     "nRows": 500
     },
     "filters": {
      "kind": "Filters",
      "removeNaN": true,
-     "namedFilters": []
+     "namedFilters": [
+      {
+       "kind": "NamedFilter",
+       "logical": "and",
+       "not": false,
+       "filterExprs": [
+        {
+         "kind": "FilterExpr",
+         "filterOp": "less",
+         "stringValue": "10000",
+         "factor": {
+          "kind": "Factor",
+          "name": "row_id",
+          "type": "double"
+         }
+        }
+       ],
+       "meta": [],
+       "name": "row_id"
+      }
+     ]
     },
     "operatorSettings": {
      "kind": "OperatorSettings",
@@ -289,7 +309,7 @@
       "kind": "OperatorRef",
       "name": "asinh",
       "version": "1.1.0",
-      "operatorId": "1",
+      "operatorId": "0",
       "operatorKind": "ROperator",
       "propertyValues": [
        {
@@ -349,7 +369,7 @@
    },
    "computedRelation": {
     "kind": "Relation",
-    "id": "09a86094-e7c5-4689-b3c6-3242a3e0b204"
+    "id": "ad79daae-6d68-4000-9fdf-09212132d531"
    },
    "parentDataStepId": ""
   },
@@ -392,7 +412,7 @@
     "kind": "TableStepModel",
     "relation": {
      "kind": "UnionRelation",
-     "id": "7e4bb3e8-3a3a-424b-bcd2-0bd37cc80768",
+     "id": "2258b1a1-4405-432a-a253-2e5a2daf6fe6",
      "relations": []
     }
    }
@@ -552,7 +572,7 @@
     },
     "columnTable": {
      "kind": "CrosstabTable",
-     "cellSize": 0.017920525360433804,
+     "cellSize": 0.5328458984947622,
      "offset": 0,
      "graphicalFactors": [
       {
@@ -578,7 +598,7 @@
       }
      ],
      "rectangleSelections": [],
-     "nRows": 208916
+     "nRows": 500
     },
     "filters": {
      "kind": "Filters",
@@ -591,8 +611,8 @@
      "operatorRef": {
       "kind": "OperatorRef",
       "name": "Scyan",
-      "version": "dd66274cfeca88860820a8b12819397eea68bf21",
-      "operatorId": "0",
+      "version": "5c313854573e10a90e04cd5b191f7b4964de0171",
+      "operatorId": "1",
       "operatorKind": "DockerOperator",
       "propertyValues": [
        {
@@ -653,7 +673,33 @@
        "outputSpecs": []
       }
      },
-     "environment": [],
+     "environment": [
+      {
+       "kind": "Pair",
+       "key": "cpu",
+       "value": "0"
+      },
+      {
+       "kind": "Pair",
+       "key": "ram",
+       "value": "0"
+      },
+      {
+       "kind": "Pair",
+       "key": "cpu-shares",
+       "value": "0"
+      },
+      {
+       "kind": "Pair",
+       "key": "tercen.collect.stats",
+       "value": "false"
+      },
+      {
+       "kind": "Pair",
+       "key": "debug",
+       "value": "false"
+      }
+     ],
      "operatorModel": {
       "kind": "OperatorModel"
      }
@@ -692,7 +738,7 @@
    },
    "computedRelation": {
     "kind": "Relation",
-    "id": "22c7cbdc-3449-4dbb-8cb8-2cca64146e78"
+    "id": "2a619d66-4ddf-4bdd-9024-e8b38578782c"
    },
    "parentDataStepId": ""
   },
@@ -966,7 +1012,7 @@
    },
    "computedRelation": {
     "kind": "Relation",
-    "id": "b8046254-fead-4def-98dd-e9d2e39679bb"
+    "id": "9527c5ac-d652-44e7-9c23-9da50ec1d1c5"
    },
    "parentDataStepId": "12ac4d48-8830-43a7-bd1e-29633c907eb2"
   }

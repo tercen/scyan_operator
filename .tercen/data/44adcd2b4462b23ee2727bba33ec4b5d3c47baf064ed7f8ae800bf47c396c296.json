@@ -1,10 +1,10 @@
 {
  "kind": "ComputedTableSchema",
- "id": "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f",
+ "id": "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296",
  "isDeleted": false,
  "rev": "",
  "description": "",
- "name": "066b2850-56fa-1f07-ba5c-9f0b3c2cb8f6",
+ "name": "ba19db70-386e-1f0d-99a3-8d0611a9e74d",
  "acl": {
   "kind": "Acl",
   "owner": "",
@@ -24,7 +24,7 @@
   {
    "kind": "Pair",
    "key": "SHA256",
-   "value": "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f"
+   "value": "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296"
   }
  ],
  "url": {
@@ -35,11 +35,11 @@
  "isPublic": false,
  "projectId": "",
  "folderId": "",
- "nRows": 208916,
+ "nRows": 500,
  "columns": [
   {
    "kind": "ColumnSchema",
-   "id": "d3c40dd7-795e-4882-917b-a368be6625e4",
+   "id": "49779aca-6433-47d6-a7fa-f369eeaa8dc4",
    "name": ".ci",
    "type": "int32",
    "nRows": 0,
@@ -54,7 +54,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "ae258f4d-25b8-4a07-8e62-092a8e62c190",
+   "id": "035b42dc-2e98-4f60-9310-b43d3fcf0607",
    "name": "ds1.PredictedPopulation_Population",
    "type": "string",
    "nRows": 0,
@@ -69,7 +69,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "ee9fae4e-7692-4e75-948f-96cbd1bffd3f",
+   "id": "e13385e4-7710-4cd7-a2a5-655ee30ec385",
    "name": "ds1.MaxLogProb_Population",
    "type": "double",
    "nRows": 0,
@@ -84,7 +84,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "5a194360-84f5-46c3-b87a-14bafbd7443b",
+   "id": "86891819-0133-4563-b7b3-1e5533e2ac15",
    "name": "ds1.PredictedPopulation_level",
    "type": "string",
    "nRows": 0,
@@ -99,7 +99,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "fbf21af7-609e-49dc-8a91-9dcdc6f69561",
+   "id": "08ca0ce2-0b3c-48d6-bac6-c1f23e656b0e",
    "name": "ds1.MaxLogProb_level",
    "type": "double",
    "nRows": 0,
@@ -113,19 +113,19 @@
    }
   }
  ],
- "dataDirectory": "data/f3/cb/f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f",
+ "dataDirectory": "data/44/ad/44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296",
  "relation": {
   "kind": "Relation",
-  "id": "f10b46c0-9783-4fd7-a661-cee11b58eac3"
+  "id": "a367262d-2746-4049-882b-c7861122e8ca"
  },
  "query": {
   "kind": "CubeQuery",
   "relation": {
    "kind": "RenameRelation",
-   "id": "be476126-5d9f-4eb1-80b4-24d7d96ed20a",
+   "id": "3a6403ba-044c-4662-b8c8-7fc43de0aeb8",
    "relation": {
     "kind": "CompositeRelation",
-    "id": "c2277642-cfc9-4454-a824-a9427939ebaa",
+    "id": "a0e8d323-1ee1-45b8-8fdb-8d5c8c954322",
     "joinOperators": [
      {
       "kind": "JoinOperator",
@@ -136,19 +136,19 @@
         ".ri"
        ],
        "rColumns": [
-        "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e._rids"
+        "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4._rids"
        ]
       },
       "rightRelation": {
        "kind": "SimpleRelation",
-       "id": "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e",
+       "id": "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4",
        "index": 2
       }
      }
     ],
     "mainRelation": {
      "kind": "CompositeRelation",
-     "id": "1862fcb5-aec1-4e8a-b8a1-2da3a2fcc478",
+     "id": "92168699-41df-4c67-9415-4934d31b3cba",
      "joinOperators": [
       {
        "kind": "JoinOperator",
@@ -159,19 +159,19 @@
          ".ci"
         ],
         "rColumns": [
-         "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f._rids"
+         "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d._rids"
         ]
        },
        "rightRelation": {
         "kind": "SimpleRelation",
-        "id": "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f",
+        "id": "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d",
         "index": 1
        }
       }
      ],
      "mainRelation": {
       "kind": "SimpleRelation",
-      "id": "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde",
+      "id": "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe",
       "index": 0
      }
     }
@@ -180,14 +180,14 @@
     ".ri",
     ".ci",
     "ds0.asinh",
-    "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde._rids",
-    "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde.tlbId",
+    "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe._rids",
+    "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe.tlbId",
     "row_id",
-    "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f._rids",
-    "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f.tlbId",
+    "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d._rids",
+    "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d.tlbId",
     "Marker",
-    "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e._rids",
-    "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e.tlbId",
+    "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4._rids",
+    "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4.tlbId",
     "row_id",
     "Marker"
    ],
@@ -195,14 +195,14 @@
     ".ri",
     ".ci",
     "ds0.asinh",
-    "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde._rids",
-    "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde.tlbId",
+    "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe._rids",
+    "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe.tlbId",
     "row_id",
-    "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f._rids",
-    "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f.tlbId",
+    "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d._rids",
+    "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d.tlbId",
     "Marker",
-    "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e._rids",
-    "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e.tlbId",
+    "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4._rids",
+    "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4.tlbId",
     "ds0..row_id",
     "ds0..Marker"
    ]
@@ -262,7 +262,7 @@
     "kind": "OperatorRef",
     "name": "Scyan",
     "version": "5c313854573e10a90e04cd5b191f7b4964de0171",
-    "operatorId": "9",
+    "operatorId": "1",
     "operatorKind": "DockerOperator",
     "propertyValues": [
      {

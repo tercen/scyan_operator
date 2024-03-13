@@ -1,6 +1,6 @@
 {
  "kind": "CubeQueryTableSchema",
- "id": "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e",
+ "id": "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d",
  "isDeleted": false,
  "rev": "",
  "description": "",
@@ -24,7 +24,7 @@
   {
    "kind": "Pair",
    "key": "SHA256",
-   "value": "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e"
+   "value": "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d"
   }
  ],
  "url": {
@@ -35,12 +35,12 @@
  "isPublic": false,
  "projectId": "",
  "folderId": "",
- "nRows": 208916,
+ "nRows": 500,
  "columns": [
   {
    "kind": "ColumnSchema",
-   "id": "fe4bb1b0-cd88-41e0-b399-872da0122200",
-   "name": "ds0..row_id",
+   "id": "9268c8b4-0bb1-4072-acc1-e318f249c011",
+   "name": "row_id",
    "type": "double",
    "nRows": 0,
    "size": -1,
@@ -53,18 +53,18 @@
    }
   }
  ],
- "dataDirectory": "data/9b/3e/9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e",
+ "dataDirectory": "data/2a/1c/2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d",
  "relation": {
   "kind": "Relation",
-  "id": "08533575-0c65-4739-9bc3-129e23e03355"
+  "id": "b308f2f6-eaf5-495e-9356-b74e39b33afb"
  },
- "queryHash": "7674d184b03dcfb1f4bfab228b04d9c0",
+ "queryHash": "d96353064e4e7999ffcb8067d5194791",
  "queryTableType": "column",
  "query": {
   "kind": "CubeQuery",
   "relation": {
    "kind": "Relation",
-   "id": "afdef415-14b3-40f5-89be-53f3613a36ba"
+   "id": "29ed8dd8-34cd-4785-8ad6-0c1872571fba"
   },
   "colColumns": [],
   "rowColumns": [],

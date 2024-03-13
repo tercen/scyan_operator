@@ -1,10 +1,10 @@
 {
  "kind": "ComputedTableSchema",
- "id": "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde",
+ "id": "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe",
  "isDeleted": false,
  "rev": "",
  "description": "",
- "name": "09b9eb40-7d04-1ef5-90ff-ebc8510477be",
+ "name": "af48f490-3848-1f0d-99a3-8d0611a9e74d",
  "acl": {
   "kind": "Acl",
   "owner": "",
@@ -24,7 +24,7 @@
   {
    "kind": "Pair",
    "key": "SHA256",
-   "value": "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde"
+   "value": "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe"
   }
  ],
  "url": {
@@ -35,11 +35,11 @@
  "isPublic": false,
  "projectId": "",
  "folderId": "",
- "nRows": 8147724,
+ "nRows": 19500,
  "columns": [
   {
    "kind": "ColumnSchema",
-   "id": "a5f4c78f-2420-4c88-89c3-e2c80dd2cd27",
+   "id": "40532a51-cfbf-43c9-813a-3d39613f9e62",
    "name": ".ri",
    "type": "int32",
    "nRows": 0,
@@ -54,7 +54,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "b2dd2270-c2ec-4bd1-98e0-a560af6a19fb",
+   "id": "19d0ca19-5c54-430d-ab1b-1860a83bade2",
    "name": ".ci",
    "type": "int32",
    "nRows": 0,
@@ -69,7 +69,7 @@
   },
   {
    "kind": "ColumnSchema",
-   "id": "9342b5e3-2f28-4e01-ab9c-84da4608bcfc",
+   "id": "b3b7e08c-2b23-4ee8-8a94-839108356683",
    "name": "ds0.asinh",
    "type": "double",
    "nRows": 0,
@@ -83,16 +83,16 @@
    }
   }
  ],
- "dataDirectory": "data/b5/07/b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde",
+ "dataDirectory": "data/10/be/10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe",
  "relation": {
   "kind": "Relation",
-  "id": "c6b77732-2a95-4efc-8695-36e160e1e6ce"
+  "id": "0514cf1b-1969-43fe-a72c-60eeaaccbc0a"
  },
  "query": {
   "kind": "CubeQuery",
   "relation": {
    "kind": "RenameRelation",
-   "id": "4b78727b-1b5d-4f72-ae6a-fc0d66aa41ef",
+   "id": "07c6e4c2-21aa-4091-9c03-db9de18e4e7c",
    "relation": {
     "kind": "SimpleRelation",
     "id": "a39892f8d1cf909f1188f08cfc9934d138d7595e6ecaf544e8d72ca9b6582506",
@@ -159,7 +159,27 @@
   "filters": {
    "kind": "Filters",
    "removeNaN": true,
-   "namedFilters": []
+   "namedFilters": [
+    {
+     "kind": "NamedFilter",
+     "logical": "and",
+     "not": false,
+     "filterExprs": [
+      {
+       "kind": "FilterExpr",
+       "filterOp": "less",
+       "stringValue": "10000",
+       "factor": {
+        "kind": "Factor",
+        "name": "row_id",
+        "type": "double"
+       }
+      }
+     ],
+     "meta": [],
+     "name": "row_id"
+    }
+   ]
   },
   "operatorSettings": {
    "kind": "OperatorSettings",
@@ -168,7 +188,7 @@
     "kind": "OperatorRef",
     "name": "asinh",
     "version": "1.1.0",
-    "operatorId": "1",
+    "operatorId": "0",
     "operatorKind": "ROperator",
     "propertyValues": [
      {

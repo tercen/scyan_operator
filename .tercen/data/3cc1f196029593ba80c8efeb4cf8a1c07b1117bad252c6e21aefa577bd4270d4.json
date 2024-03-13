@@ -1,10 +1,10 @@
 {
  "kind": "CubeQueryTableSchema",
- "id": "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f",
+ "id": "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4",
  "isDeleted": false,
  "rev": "",
  "description": "",
- "name": "column",
+ "name": "row",
  "acl": {
   "kind": "Acl",
   "owner": "",
@@ -23,8 +23,13 @@
  "meta": [
   {
    "kind": "Pair",
+   "key": "Marker.size_in_bytes",
+   "value": "616"
+  },
+  {
+   "kind": "Pair",
    "key": "SHA256",
-   "value": "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f"
+   "value": "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4"
   }
  ],
  "url": {
@@ -35,13 +40,13 @@
  "isPublic": false,
  "projectId": "",
  "folderId": "",
- "nRows": 208916,
+ "nRows": 39,
  "columns": [
   {
    "kind": "ColumnSchema",
-   "id": "3e8df20a-5698-4d6f-acc6-ac86e61e5d57",
-   "name": "row_id",
-   "type": "double",
+   "id": "dd8dc2c3-f889-464c-90e8-9108be0cade3",
+   "name": "Marker",
+   "type": "string",
    "nRows": 0,
    "size": -1,
    "metaData": {
@@ -53,18 +58,18 @@
    }
   }
  ],
- "dataDirectory": "data/31/3a/313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f",
+ "dataDirectory": "data/3c/c1/3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4",
  "relation": {
   "kind": "Relation",
-  "id": "181f8dcc-02ce-4014-be72-08c0cd0ba80b"
+  "id": "e5556e9a-60c1-4eac-9344-01beb0d10b7b"
  },
- "queryHash": "98a5e428e572fe826f3a041d9d0175e6",
- "queryTableType": "column",
+ "queryHash": "d96353064e4e7999ffcb8067d5194a6a",
+ "queryTableType": "row",
  "query": {
   "kind": "CubeQuery",
   "relation": {
    "kind": "Relation",
-   "id": "da4046fb-7faf-45c4-9206-04b455ac0952"
+   "id": "36d6c547-cc6d-4ae5-b51d-4d99d747b089"
   },
   "colColumns": [],
   "rowColumns": [],

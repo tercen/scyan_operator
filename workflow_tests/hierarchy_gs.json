@@ -148,7 +148,7 @@
    },
    "state": {
     "kind": "StepState",
-    "taskId": "7674d184b03dcfb1f4bfab228b03ae52",
+    "taskId": "d96353064e4e7999ffcb8067d5197f89",
     "taskState": {
      "kind": "DoneState"
     }
@@ -267,7 +267,7 @@
     },
     "columnTable": {
      "kind": "CrosstabTable",
-     "cellSize": 0.017920525360433804,
+     "cellSize": 0.48387034614896435,
      "offset": 0,
      "graphicalFactors": [
       {
@@ -293,12 +293,32 @@
       }
      ],
      "rectangleSelections": [],
-     "nRows": 208916
+     "nRows": 500
     },
     "filters": {
      "kind": "Filters",
      "removeNaN": true,
-     "namedFilters": []
+     "namedFilters": [
+      {
+       "kind": "NamedFilter",
+       "logical": "and",
+       "not": false,
+       "filterExprs": [
+        {
+         "kind": "FilterExpr",
+         "filterOp": "less",
+         "stringValue": "10000",
+         "factor": {
+          "kind": "Factor",
+          "name": "row_id",
+          "type": "double"
+         }
+        }
+       ],
+       "meta": [],
+       "name": "row_id"
+      }
+     ]
     },
     "operatorSettings": {
      "kind": "OperatorSettings",
@@ -307,7 +327,7 @@
       "kind": "OperatorRef",
       "name": "asinh",
       "version": "1.1.0",
-      "operatorId": "1",
+      "operatorId": "0",
       "operatorKind": "ROperator",
       "propertyValues": [
        {
@@ -367,7 +387,7 @@
    },
    "computedRelation": {
     "kind": "CompositeRelation",
-    "id": "03bff302-9b66-4667-a08c-8964c789afb4",
+    "id": "b536b5ae-ec19-40b6-b4e7-65d10e7ac1ed",
     "joinOperators": [
      {
       "kind": "JoinOperator",
@@ -385,10 +405,10 @@
       },
       "rightRelation": {
        "kind": "RenameRelation",
-       "id": "b658f278-4abf-4dd1-874a-3b7d970edf62",
+       "id": "e7833876-cb65-44ec-b2e2-765f34242373",
        "relation": {
         "kind": "CompositeRelation",
-        "id": "c185bb50-d612-4bda-b817-f9afc2b639a1",
+        "id": "6f50d93e-f5df-4dd3-87c5-bc3c775e35d2",
         "joinOperators": [
          {
           "kind": "JoinOperator",
@@ -399,12 +419,12 @@
             ".ci"
            ],
            "rColumns": [
-            "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f._rids"
+            "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d._rids"
            ]
           },
           "rightRelation": {
            "kind": "SimpleRelation",
-           "id": "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f",
+           "id": "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d",
            "index": 0
           }
          },
@@ -417,19 +437,19 @@
             ".ri"
            ],
            "rColumns": [
-            "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e._rids"
+            "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4._rids"
            ]
           },
           "rightRelation": {
            "kind": "SimpleRelation",
-           "id": "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e",
+           "id": "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4",
            "index": 0
           }
          }
         ],
         "mainRelation": {
          "kind": "SimpleRelation",
-         "id": "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde",
+         "id": "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe",
          "index": 0
         }
        },
@@ -437,14 +457,14 @@
         ".ri",
         ".ci",
         "ds0.asinh",
-        "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde._rids",
-        "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde.tlbId",
+        "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe._rids",
+        "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe.tlbId",
         "row_id",
-        "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f._rids",
-        "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f.tlbId",
+        "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d._rids",
+        "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d.tlbId",
         "Marker",
-        "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e._rids",
-        "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e.tlbId",
+        "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4._rids",
+        "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4.tlbId",
         "row_id",
         "Marker"
        ],
@@ -452,14 +472,14 @@
         ".ri",
         ".ci",
         "ds0.asinh",
-        "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde._rids",
-        "b507897021174ade2047e836fac20ea5d6b6b118a255288664a2868ea7054fde.tlbId",
+        "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe._rids",
+        "10be68cb6b5489fa9825e7f01030fe18465deb7264e41caa43ae579d9ee491fe.tlbId",
         "row_id",
-        "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f._rids",
-        "313a1017d3a3e34241618f428277deeb04fc4f052ee90ade1ed94acecb09f54f.tlbId",
+        "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d._rids",
+        "2a1c878c90abdd66095ef1baf717020ed760daaaf8dfaf4fb54be8f437cd9f7d.tlbId",
         "Marker",
-        "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e._rids",
-        "699634a57365256e6dc3c1d84990856d83739fbb344ff0c3850701118e79ea2e.tlbId",
+        "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4._rids",
+        "3cc1f196029593ba80c8efeb4cf8a1c07b1117bad252c6e21aefa577bd4270d4.tlbId",
         "ds0..row_id",
         "ds0..Marker"
        ]
@@ -468,7 +488,7 @@
     ],
     "mainRelation": {
      "kind": "Relation",
-     "id": "0ecd0227-5bb8-4db1-a2b1-c6b15df79c2e"
+     "id": "f0665e2f-a982-4372-83cc-2df2e94cf569"
     }
    },
    "parentDataStepId": ""
@@ -575,7 +595,7 @@
    },
    "state": {
     "kind": "StepState",
-    "taskId": "7674d184b03dcfb1f4bfab228b052a99",
+    "taskId": "d96353064e4e7999ffcb8067d51a5171",
     "taskState": {
      "kind": "DoneState"
     }
@@ -694,7 +714,7 @@
     },
     "columnTable": {
      "kind": "CrosstabTable",
-     "cellSize": 0.017920525360433804,
+     "cellSize": 0.5328458984947622,
      "offset": 0,
      "graphicalFactors": [
       {
@@ -720,7 +740,7 @@
       }
      ],
      "rectangleSelections": [],
-     "nRows": 208916
+     "nRows": 500
     },
     "filters": {
      "kind": "Filters",
@@ -734,7 +754,7 @@
       "kind": "OperatorRef",
       "name": "Scyan",
       "version": "5c313854573e10a90e04cd5b191f7b4964de0171",
-      "operatorId": "9",
+      "operatorId": "1",
       "operatorKind": "DockerOperator",
       "propertyValues": [
        {
@@ -860,7 +880,7 @@
    },
    "computedRelation": {
     "kind": "CompositeRelation",
-    "id": "1f11fae6-733c-4f9e-80c4-3612e9310b64",
+    "id": "13f2ef9b-a4df-43fa-8c40-8502a7cf4527",
     "joinOperators": [
      {
       "kind": "JoinOperator",
@@ -876,10 +896,10 @@
       },
       "rightRelation": {
        "kind": "RenameRelation",
-       "id": "70fb2f09-ae6c-4629-8554-ad92847e6a02",
+       "id": "5fda4898-9292-4f38-90a1-cd6a97c9672a",
        "relation": {
         "kind": "CompositeRelation",
-        "id": "546884f0-89ac-4177-a54e-7a83ae819321",
+        "id": "9dae416b-079e-4b71-8175-234228edf93d",
         "joinOperators": [
          {
           "kind": "JoinOperator",
@@ -890,19 +910,19 @@
             ".ci"
            ],
            "rColumns": [
-            "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e._rids"
+            "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356._rids"
            ]
           },
           "rightRelation": {
            "kind": "SimpleRelation",
-           "id": "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e",
+           "id": "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356",
            "index": 0
           }
          }
         ],
         "mainRelation": {
          "kind": "SimpleRelation",
-         "id": "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f",
+         "id": "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296",
          "index": 0
         }
        },
@@ -912,11 +932,11 @@
         "ds1.MaxLogProb_Population",
         "ds1.PredictedPopulation_level",
         "ds1.MaxLogProb_level",
-        "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f._rids",
-        "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f.tlbId",
+        "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296._rids",
+        "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296.tlbId",
         "ds0..row_id",
-        "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e._rids",
-        "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e.tlbId",
+        "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356._rids",
+        "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356.tlbId",
         "ds0..row_id"
        ],
        "outNames": [
@@ -925,11 +945,11 @@
         "ds1.MaxLogProb_Population",
         "ds1.PredictedPopulation_level",
         "ds1.MaxLogProb_level",
-        "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f._rids",
-        "f3cb905bc13f8361e208646d864a46f3d91eba63c2ca29af81d3db3808ed647f.tlbId",
+        "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296._rids",
+        "44adcd2b4462b23ee2727bba33ec4b5d3c47baf064ed7f8ae800bf47c396c296.tlbId",
         "ds0..row_id",
-        "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e._rids",
-        "9b3ec12a4f88df414655a8e67ff6403cb6135aeb526cd33f9fd4e2949e77bd6e.tlbId",
+        "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356._rids",
+        "22f7ec7259372974a45ae618d315c4b46ff28abc0d46d894a72ab47aa9826356.tlbId",
         "ds1..row_id"
        ]
       }
@@ -937,7 +957,7 @@
     ],
     "mainRelation": {
      "kind": "Relation",
-     "id": "d98fce84-a833-400a-bd1e-b777fa614938"
+     "id": "cccb6b78-6c53-43af-854e-4c4a990b5882"
     }
    },
    "parentDataStepId": ""
@@ -978,7 +998,7 @@
    },
    "state": {
     "kind": "StepState",
-    "taskId": "7674d184b03dcfb1f4bfab228b050348",
+    "taskId": "d96353064e4e7999ffcb8067d51a1a66",
     "taskState": {
      "kind": "DoneState"
     }
@@ -1212,7 +1232,7 @@
    },
    "computedRelation": {
     "kind": "Relation",
-    "id": "19977632-2fad-48a6-abf8-bd8169f44413"
+    "id": "d446f2e7-52be-4e51-aacb-bfe611c93eff"
    },
    "parentDataStepId": "12ac4d48-8830-43a7-bd1e-29633c907eb2"
   }
