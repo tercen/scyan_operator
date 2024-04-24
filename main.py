@@ -1,5 +1,7 @@
 from tercen.client import context as context
 from tercen.model.impl import Pair
+from tercen.util.helper_functions import as_relation, as_join_operator, left_join_relation, dataframe_to_table
+
 import numpy as np
 import polars as pl
 import pandas as pd
@@ -144,8 +146,7 @@ model = scyan.Scyan(adata=adata, table=tablePd, \
 
 
 ctx.log("Fitting model...")
-model.fit(  )
-
+model.fit()
 
 ctx.log("Predicting cell populations...")
 model.predict()
@@ -154,85 +155,70 @@ ctx.log("Calculating population probabilities")
 outDf = None
 outDf2 = None
 
+## Get predictions (Table 1)
 populations = [""]
 [populations.append(p) for p in model.level_names]
-
-for j in range(0, len(populations)):
-    popLabel = populations[j]
-    tercenColName = ctx2.rnames[j]
-    if popLabel == "":
-        outColName = "scyan_pop"
-    else:
-        outColName = "scyan_pop_{}".format(popLabel)
-
-    fakeSeries = model.adata.obs[outColName] != 'NoPop'
-    fakeSeries[0] = True
-    logProbs = model.module.prior.log_prob(model(fakeSeries))
-
-    dfList = [] 
-    dfList2 = [] 
-
     
-        
+model.adata.obs[".ci"] = np.arange(len(model.adata.obs), dtype='int32')
+df_pred = model.adata.obs
+df_pred = (df_pred
+    .rename(columns={"scyan_log_probs": "Log_Prob", "scyan_pop": "Predicted_Population"})
+    .astype({'Observation': 'string', 'Predicted_Population': 'string', 'Log_Prob': 'float64'})
+    .drop(['Observation'], axis=1)
+    .fillna('None')
+)
 
-    predColName = "PredictedPopulation_{}".format(tercenColName)
-    predMaxLogProbName  = "MaxLogProb_{}".format(tercenColName)
+## Get latent expression values (Table 2) 
+x = model().numpy(force=True)
+columns = model.var_names
+df_latent = pd.DataFrame(x, columns=columns, index=model.adata.obs.index)
+df_latent["Population"] = model.adata.obs['scyan_pop']
+df_latent_summ = df_latent.groupby("Population").mean().reset_index()
 
-    for i in range(0, len(model.adata.obs_names)):
-        tmpDf = pl.DataFrame({".ci":int(i) })
+df_latent_out = (
+    pd
+    .melt(df_latent_summ, id_vars='Population', var_name='Latent_Marker', value_name='Latent_Expression')
+    .rename(columns={"Population": "Latent_Population"})
+    .astype({'Latent_Population': 'string', 'Latent_Expression': 'float64', 'Latent_Marker': 'string'})
+)
+## Get population names (Table 3) 
+df_pops = ctx2.rselect(df_lib="pandas").rename(columns={"Population": "Predicted_Population"})
+new_row = pd.Series([str('None')]*len(df_pops.columns), index=df_pops.columns)
+df_pops.loc[-1] = new_row
+df_pops.index = df_pops.index + 1
+df_pops = df_pops.sort_index().astype('string')
+df_pops[".id2"] = np.arange(len(df_pops), dtype='int32')
 
-        if isinstance( model.adata.obs[outColName].iloc[i], str ):
-            pop = model.adata.obs[outColName].iloc[i] 
-        else:
-            pop = "None"
+# join to higher levels
+# to do
 
-        tmpDf = tmpDf.with_columns(pl.lit(pop).alias(predColName ) ).\
-                    with_columns(pl.lit(np.max(logProbs[i,:].tolist())).alias(predMaxLogProbName ) )
-        
-        dfList.append(tmpDf)
+# Replace population string by index in first table
+# if relation mapping
+# df_pred['.id1'] = df_pred['Predicted_Population'].map(df_pops.set_index('Predicted_Population')['.id2']).astype('Int32')
+# df_pred_out = df_pred.drop(['Predicted_Population'], axis=1).astype({'.id1': 'int32'})
 
-        if fullOutput == True:
-            logPops = logProbs[i,:].tolist()
-            probs = (np.exp(logPops) / (np.exp(logPops)).sum()).tolist()
-            tmpDf2 = pl.DataFrame({".ci":int(i) })
-
-            predProbName = "Prob_{}".format(tercenColName)
-            predLogProbName  = "LogProb_{}".format(tercenColName)
-
-            for p in priorPop:
-                tmpDf2 = tmpDf2.with_columns(pl.lit(logPops.pop(0)).alias(predLogProbName ) ).\
-                            with_columns(pl.lit(probs.pop(0)).alias(predProbName ) )
-                dfList2.append(tmpDf2)
+df_pred_out = pd.merge(
+    df_pred, df_pops, left_on="Predicted_Population", right_on="Predicted_Population", how="left", sort=False
+)
 
 
-    if outDf is None:
-        outDf = pl.concat(dfList)
-    else:
-        outDf = outDf.join(  pl.concat(dfList), on=".ci" ) 
-    dfList = None
+# Format and save output
+ctx.log("Saving output")
 
-    if fullOutput == True:
-        if outDf2 is None:
-            outDf2 = pl.concat(dfList2)
-        else:
-            outDf2 = outDf2.join(  pl.concat(dfList2), on=".ci" ) 
-        dfList2 = None
-    
+df_pred_out = ctx.add_namespace(df_pred_out) 
+df_latent_out = ctx.add_namespace(df_latent_out) 
+df_pops_out = ctx.add_namespace(df_pops) 
 
-    
-ctx.log("Saving outDf")
+ctx.save([df_pred_out, df_latent_out, df_pops_out])
 
-outDf = outDf.with_columns(pl.col(".ci").cast(pl.Int32))
-outDf = ctx.add_namespace(outDf) 
+# Save as relation
+rel_pred = as_relation(df_pred_out)
+rel_latent = as_relation(df_latent_out)
+rel_pops = as_relation(df_pops_out)
 
-if fullOutput:
-    outDf2 =  pl.concat(dfList2)
-    dfList2.clear()
-    outDf2 = outDf2.with_columns(pl.col(".ci").cast(pl.Int32))
-    outDf2 = ctx.add_namespace(outDf2) 
-    ctx.save([outDf, outDf2])
+rel_preds = left_join_relation(rel_pred, rel_pops, '.id1', '.id2')
 
-else:
-    ctx.save([outDf])
+## Expected:
+ctx.save_relation([as_join_operator(rel_preds, [], []), as_join_operator(rel_latent, [], [])])
 
 
