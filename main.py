@@ -11,29 +11,6 @@ matplotlib.use('Agg')
 
 import re
 
-def tercen_int(x):
-    ptr = re.compile('[0-9\.]+', re.UNICODE)
-    if isinstance(x, int):
-        return x
-    
-    if isinstance(x, str):
-        return int("".join(["" if ptr.match(c) is None else c for c in x]).split(".")[0])
-    else:
-        return int(x)
-    
-def tercen_float(x):
-    ptr = re.compile('[0-9\.]+', re.UNICODE)
-    if isinstance(x, int):
-        return x
-    
-    if isinstance(x, str):
-        return float("".join(["" if ptr.match(c) is None else c for c in x])[0])
-    else:
-        return float(x)
-
-def tercen_bool(x):
-    return x == 'true'
-
 ctx = context.TercenContext()
 
 if not ctx.task is None:
@@ -57,14 +34,14 @@ else:
     exit(code=0) 
     ctx2 = None
 
-priorSd = ctx.operator_property('PriorSD', typeFn=tercen_float, default=0.3)
-lr = ctx.operator_property('LR', typeFn=tercen_float, default=0.0005)
-nLayers = ctx.operator_property('Layers', typeFn=tercen_int, default=7)
-nHiddenLayers = ctx.operator_property('Hidden Layers', typeFn=tercen_int, default=6)
-hiddenSz = ctx.operator_property('Hidden Size', typeFn=tercen_int, default=16)
-temperature = ctx.operator_property('Temperature', typeFn=tercen_float, default=0.5)
-moduloTemp = ctx.operator_property('Modulo Temp', typeFn=tercen_int, default=3)
-batchSize = ctx.operator_property('Batch Size', typeFn=tercen_int, default=8192)
+priorSd = ctx.operator_property('PriorSD', typeFn=float, default=0.3)
+lr = ctx.operator_property('LR', typeFn=float, default=0.0005)
+nLayers = ctx.operator_property('Layers', typeFn=int, default=7)
+nHiddenLayers = ctx.operator_property('Hidden Layers', typeFn=int, default=6)
+hiddenSz = ctx.operator_property('Hidden Size', typeFn=int, default=16)
+temperature = ctx.operator_property('Temperature', typeFn=float, default=0.5)
+moduloTemp = ctx.operator_property('Modulo Temp', typeFn=int, default=3)
+batchSize = ctx.operator_property('Batch Size', typeFn=int, default=8192)
 warmUp = ctx.operator_property('WarmUp', typeFn=str, default="(0.35,4)")
 w1 = float(warmUp.split(",")[0].replace("(", "").strip())
 w2 = float(warmUp.split(",")[1].replace(")", "").strip())
