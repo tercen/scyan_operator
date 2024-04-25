@@ -57,10 +57,6 @@ else:
     exit(code=0) 
     ctx2 = None
 
-
-
-#Dbg
-fullOutput = ctx.operator_property('FullOutput', typeFn=tercen_bool, default=False)
 priorSd = ctx.operator_property('PriorSD', typeFn=tercen_float, default=0.3)
 lr = ctx.operator_property('LR', typeFn=tercen_float, default=0.0005)
 nLayers = ctx.operator_property('Layers', typeFn=tercen_int, default=7)
@@ -79,7 +75,7 @@ colDf = ctx.cselect([""])
 
 
 colDf = colDf.select('o' + pl.col(colDf.columns[0]).cast(pl.Int32).cast(pl.Utf8))
-colDf = colDf.with_columns(pl.Series(name=".ci", values=range(0,len(colDf) ), dtype=pl.Int32) )
+colDf = colDf.with_columns(pl.Series(name=".ci", values=range(0,len(colDf) ), dtype=pl.Int32))
 
 
 rowDf = ctx.rselect([""])
@@ -108,10 +104,11 @@ annColDf = annColDf.drop([".ci"])
 
 annDfP = annDf.pivot(columns=annColDf.columns[0], index=annRowDf.columns, values=".y", aggregate_function='first')
 
-yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.columns[0], aggregate_function='first'  ) #[:,1:]
+yDfP = yDf.pivot(columns=yDf.columns[2], index=yDf.columns[1], values=yDf.columns[0], aggregate_function='first') #[:,1:]
 
+pop_names = ctx2.rnames
 
-markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[len(ctx2.rnames):])
+markers = np.intersect1d(yDfP.columns[1:], annDfP.columns[len(pop_names):])
 priorPop = annDfP[:,0].to_numpy()
 
 adata = anndata.AnnData(  yDfP.to_numpy()[:,1:].astype(np.float32) )
@@ -126,15 +123,15 @@ adata.obs_names = yDfP[yDf.columns[1]]
 # Population -> Highest variance : Leaves in the hierarchy tree
 tablePd = annDfP.select(markers).to_pandas()
 
-for i in range(0, len(ctx2.rnames)):
+for i in range(0, len(pop_names)):
     if i == 0: # Always call this level population
-        tablePd["Population"] = annDfP[ctx2.rnames[i]].to_numpy()
+        tablePd["Population"] = annDfP[pop_names[i]].to_numpy()
     else:
-        tablePd[ctx2.rnames[i]] = annDfP[ctx2.rnames[i]].to_numpy() 
+        tablePd[pop_names[i]] = annDfP[pop_names[i]].to_numpy() 
 
 
-tablePd[ctx2.rnames] = tablePd[ctx2.rnames].astype('category')
-tablePd = tablePd.set_index(ctx2.rnames)
+tablePd[pop_names] = tablePd[pop_names].astype('category')
+tablePd = tablePd.set_index(pop_names)
 
 
 model = scyan.Scyan(adata=adata, table=tablePd, \
@@ -151,9 +148,7 @@ model.fit()
 ctx.log("Predicting cell populations...")
 model.predict()
 
-ctx.log("Calculating population probabilities")
-outDf = None
-outDf2 = None
+ctx.log("Preparing results...")
 
 ## Get predictions (Table 1)
 populations = [""]
@@ -175,7 +170,7 @@ df_latent = pd.DataFrame(x, columns=columns, index=model.adata.obs.index)
 df_latent["Population"] = model.adata.obs['scyan_pop']
 df_latent_summ = df_latent.groupby("Population").mean().reset_index()
 
-df_latent_out = (
+df_latent_prep = (
     pd
     .melt(df_latent_summ, id_vars='Population', var_name='Latent_Marker', value_name='Latent_Expression')
     .rename(columns={"Population": "Latent_Population"})
@@ -189,36 +184,35 @@ df_pops.index = df_pops.index + 1
 df_pops = df_pops.sort_index().astype('string')
 df_pops[".id2"] = np.arange(len(df_pops), dtype='int32')
 
-# join to higher levels
-# to do
+## Replace population string by index in first table
+df_pred['.id1'] = df_pred['Predicted_Population'].map(df_pops.set_index('Predicted_Population')['.id2']).astype('Int32')
+df_pred = df_pred.drop(['Predicted_Population'], axis=1).astype({'.id1': 'Int32'})
 
-# Replace population string by index in first table
-# if relation mapping
-# df_pred['.id1'] = df_pred['Predicted_Population'].map(df_pops.set_index('Predicted_Population')['.id2']).astype('Int32')
-# df_pred_out = df_pred.drop(['Predicted_Population'], axis=1).astype({'.id1': 'int32'})
+# df_pred_out = pd.merge(
+#     df_pred, df_pops, left_on="Predicted_Population", right_on="Predicted_Population", how="left", sort=False
+# )
 
-df_pred_out = pd.merge(
-    df_pred, df_pops, left_on="Predicted_Population", right_on="Predicted_Population", how="left", sort=False
-)
-
-
-# Format and save output
+## Format and save output
 ctx.log("Saving output")
 
-df_pred_out = ctx.add_namespace(df_pred_out) 
-df_latent_out = ctx.add_namespace(df_latent_out) 
-df_pops_out = ctx.add_namespace(df_pops) 
+df_pred_out = pl.DataFrame(df_pred.astype({'Log_Prob': 'Float32', '.ci': 'Int32', '.id1': 'Int32'}))
+df_latent_out = pl.DataFrame(df_latent_prep.astype({'Latent_Expression': 'Float32'}))
+df_pops_out = pl.DataFrame(df_pops.astype({'.id2': 'Int32'}))
 
-ctx.save([df_pred_out, df_latent_out, df_pops_out])
+df_pred_out = ctx.add_namespace(df_pred_out)
+df_latent_out = ctx.add_namespace(df_latent_out)
+df_pops_out = ctx.add_namespace(df_pops_out)
 
-# Save as relation
+## Save as relation
 rel_pred = as_relation(df_pred_out)
 rel_latent = as_relation(df_latent_out)
 rel_pops = as_relation(df_pops_out)
 
-rel_preds = left_join_relation(rel_pred, rel_pops, '.id1', '.id2')
+crel = ctx.get_crelation()
+rids_factor = ''.join((crel.id, "._rids"))
 
-## Expected:
-ctx.save_relation([as_join_operator(rel_preds, [], []), as_join_operator(rel_latent, [], [])])
+rel_result = left_join_relation(rel_pred, crel, '.ci', rids_factor)
+rel_result = left_join_relation(rel_result, rel_pops, '.id1', '.id2')
 
-
+ctx.save_relation([as_join_operator(rel_result, ctx.cnames, ctx.cnames)])
+#ctx.save_relation([as_join_operator(rel_result, ctx.cnames, ctx.cnames), as_join_operator(rel_latent, [], [])])
