@@ -70,7 +70,7 @@ annDf = ctx2.select([".y", ".ci", ".ri"])
 annColDf = ctx2.cselect([""])
 annColDf = annColDf.with_columns(pl.Series(name=".ci", values=range(0,len(annColDf)), dtype=pl.Int32))
 
-annRowDf = ctx2.rselect([""])
+annRowDf = ctx2.rselect([""]).select(["Population"])
 annRowDf = annRowDf.with_columns(pl.Series(name=".ri", values=range(0,len(annRowDf)), dtype=pl.Int32))
 
 annDf = annDf.join(annColDf, on=".ci").join(annRowDf, ".ri")
@@ -100,16 +100,8 @@ adata.obs_names = yDfP[yDf.columns[1]]
 
 # Population -> Highest variance : Leaves in the hierarchy tree
 tablePd = annDfP.select(markers).to_pandas()
-
-for i in range(0, len(pop_names)):
-    if i == 0: # Always call this level population
-        tablePd["Population"] = annDfP[pop_names[i]].to_numpy()
-    else:
-        tablePd[pop_names[i]] = annDfP[pop_names[i]].to_numpy() 
-
-
-tablePd[pop_names] = tablePd[pop_names].astype('category')
-tablePd = tablePd.set_index(pop_names)
+tablePd["Population"] = annDfP[pop_names[0]].to_numpy()
+tablePd = tablePd.set_index('Population')
 
 
 model = scyan.Scyan(adata=adata, table=tablePd, \
@@ -131,7 +123,7 @@ ctx.log("Preparing results...")
 ## Get predictions (Table 1)
 populations = [""]
 [populations.append(p) for p in model.level_names]
-    
+
 model.adata.obs[".ci"] = np.arange(len(model.adata.obs), dtype='int32')
 df_pred = model.adata.obs
 df_pred = (df_pred
