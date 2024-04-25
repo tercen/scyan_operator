@@ -34,6 +34,7 @@ else:
     exit(code=0) 
     ctx2 = None
 
+
 priorSd = ctx.operator_property('PriorSD', typeFn=float, default=0.3)
 lr = ctx.operator_property('LR', typeFn=float, default=0.0005)
 nLayers = ctx.operator_property('Layers', typeFn=int, default=7)
@@ -135,7 +136,7 @@ model.adata.obs[".ci"] = np.arange(len(model.adata.obs), dtype='int32')
 df_pred = model.adata.obs
 df_pred = (df_pred
     .rename(columns={"scyan_log_probs": "Log_Prob", "scyan_pop": "Predicted_Population"})
-    .astype({'Observation': 'string', 'Predicted_Population': 'string', 'Log_Prob': 'float64'})
+    .astype({'Observation': 'string', 'Predicted_Population': 'string', 'Log_Prob': 'float'})
     .drop(['Observation'], axis=1)
     .fillna('None')
 )
@@ -172,8 +173,8 @@ df_pred = df_pred.drop(['Predicted_Population'], axis=1).astype({'.id1': 'Int32'
 ## Format and save output
 ctx.log("Saving output")
 
-df_pred_out = pl.DataFrame(df_pred.astype({'Log_Prob': 'Float32', '.ci': 'Int32', '.id1': 'Int32'}))
-df_latent_out = pl.DataFrame(df_latent_prep.astype({'Latent_Expression': 'Float32'}))
+df_pred_out = pl.DataFrame(df_pred.astype({'Log_Prob': 'float', '.ci': 'Int32', '.id1': 'Int32'}))
+df_latent_out = pl.DataFrame(df_latent_prep.astype({'Latent_Expression': 'float'}))
 df_pops_out = pl.DataFrame(df_pops.astype({'.id2': 'Int32'}))
 
 df_pred_out = ctx.add_namespace(df_pred_out)
